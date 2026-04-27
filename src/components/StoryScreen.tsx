@@ -103,7 +103,7 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
 };
 
 const PrintArea = ({ results, story }: { results: Props["results"]; story: StoryText }) => (
-  <div className="print-area hidden">
+  <div className="print-area">
     <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#3b1d6b", marginBottom: 8 }}>
       Uma Fábrica de Histórias Malucas!
     </h1>
