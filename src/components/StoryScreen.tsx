@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
 
 export type StoryText = { inicio: string; meio: string; fim: string };
@@ -102,31 +103,76 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
   );
 };
 
-const PrintArea = ({ results, story }: { results: Props["results"]; story: StoryText }) => (
-  <div className="print-area hidden">
-    <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#3b1d6b", marginBottom: 8 }}>
-      Uma Fábrica de Histórias Malucas!
-    </h1>
-    <h2 style={{ color: "#666", marginBottom: 24, fontWeight: 500 }}>Minha história fabricada</h2>
+const PrintArea = ({ results, story }: { results: Props["results"]; story: StoryText }) => {
+  const node = (
+    <div className="print-area">
+      <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#3b1d6b", marginBottom: 4 }}>
+        Uma Fábrica de Histórias Malucas!
+      </h1>
+      <h2 style={{ color: "#666", marginBottom: 20, fontWeight: 500, fontSize: 18 }}>
+        Minha história fabricada
+      </h2>
 
-    <h3 style={{ color: "#3b1d6b", marginBottom: 8 }}>Elementos sorteados</h3>
-    <ul style={{ marginBottom: 24, paddingLeft: 20 }}>
-      {CATEGORY_ORDER.map((k) => {
-        const it = results[k];
-        if (!it) return null;
-        return (
-          <li key={k} style={{ marginBottom: 4 }}>
-            <strong>{CATEGORIES[k].title}:</strong> {it.label}
-          </li>
-        );
-      })}
-    </ul>
-
-    {(["inicio", "meio", "fim"] as const).map((k) => (
-      <div key={k} style={{ marginBottom: 18 }}>
-        <h3 style={{ color: "#3b1d6b", marginBottom: 6 }}>{FIELD_LABEL[k].title}</h3>
-        <p style={{ whiteSpace: "pre-wrap", lineHeight: 1.5 }}>{story[k] || "—"}</p>
+      <h3 style={{ color: "#3b1d6b", marginBottom: 10, fontSize: 18 }}>Elementos sorteados</h3>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 1fr)",
+          gap: 12,
+          marginBottom: 24,
+        }}
+      >
+        {CATEGORY_ORDER.map((k) => {
+          const it = results[k];
+          if (!it) return null;
+          return (
+            <div
+              key={k}
+              style={{
+                border: "2px solid #d6cce8",
+                borderRadius: 12,
+                padding: 8,
+                textAlign: "center",
+              }}
+            >
+              <img
+                src={it.image}
+                alt={it.label}
+                style={{ width: 70, height: 70, objectFit: "contain", margin: "0 auto" }}
+              />
+              <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>
+                {CATEGORIES[k].title}
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "#3b1d6b" }}>
+                {it.label}
+              </div>
+            </div>
+          );
+        })}
       </div>
-    ))}
-  </div>
-);
+
+      {(["inicio", "meio", "fim"] as const).map((k) => (
+        <div key={k} style={{ marginBottom: 16, pageBreakInside: "avoid" }}>
+          <h3 style={{ color: "#3b1d6b", marginBottom: 6, fontSize: 18 }}>
+            {FIELD_LABEL[k].title}
+          </h3>
+          <p
+            style={{
+              whiteSpace: "pre-wrap",
+              lineHeight: 1.6,
+              fontSize: 14,
+              color: "#222",
+              borderBottom: "1px solid #eee",
+              paddingBottom: 8,
+              minHeight: 40,
+            }}
+          >
+            {story[k] || "—"}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+  return createPortal(node, document.body);
+};
+
