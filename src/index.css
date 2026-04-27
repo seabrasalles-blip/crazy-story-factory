@@ -182,29 +182,26 @@
   }
 }
 
-/* Print: mostrar apenas .print-area */
+/* Print: mostrar apenas .print-area (renderizada via portal no body) */
 .print-area { display: none; }
 
 @media print {
-  @page { size: A4; margin: 16mm; }
-  html, body, #root {
+  @page { size: A4; margin: 14mm; }
+  html, body {
     height: auto !important;
     overflow: visible !important;
     background: white !important;
+    color: black !important;
   }
-  body { overflow: visible !important; }
-  /* Esconde tudo */
-  body > *:not(.print-root),
-  #root > * { display: none !important; }
+  /* Esconde todos os filhos do body */
+  body > * { display: none !important; }
   /* Mostra apenas a área de impressão */
-  .print-area {
+  body > .print-area {
     display: block !important;
     position: static !important;
     width: 100% !important;
     background: white !important;
     color: black !important;
-    padding: 0 !important;
   }
-  .print-area * { visibility: visible !important; }
   .no-print { display: none !important; }
 }
