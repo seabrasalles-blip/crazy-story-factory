@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
 
 export type StoryText = { inicio: string; meio: string; fim: string };
