@@ -124,10 +124,10 @@ export const CATEGORY_ORDER: CategoryKey[] = [
 ];
 
 export const SLICE_COLORS = [
-  "hsl(var(--slice-1))",
-  "hsl(var(--slice-2))",
-  "hsl(var(--slice-3))",
-  "hsl(var(--slice-4))",
-  "hsl(var(--slice-5))",
-  "hsl(var(--slice-6))",
+  "#FF8A00", // laranja
+  "#FFD23F", // amarelo
+  "#22B8E8", // azul
+  "#FF4F93", // rosa
+  "#35C759", // verde
+  "#7A35D8", // roxo
 ];
