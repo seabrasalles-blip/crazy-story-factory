@@ -20,7 +20,7 @@ export const IntroScreen = ({ onStart }: Props) => {
         className="btn-pop absolute"
         style={{
           left: "50%",
-          top: "78%",
+          top: "58%",
           transform: "translate(-50%, -50%)",
           minWidth: 320,
           fontSize: 28,
