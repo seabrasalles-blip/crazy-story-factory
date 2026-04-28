@@ -117,9 +117,9 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
 
 export const CATEGORY_ORDER: CategoryKey[] = [
   "personagens",
+  "cenarios",
   "amigos",
   "viloes",
-  "cenarios",
   "emocoes",
 ];
 
