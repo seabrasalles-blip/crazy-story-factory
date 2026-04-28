@@ -5,364 +5,249 @@
 @tailwind utilities;
 
 /* ================================
-   FÁBRICA DE HISTÓRIAS — VISUAL BASE
-   ================================ */
+   BASE
+================================ */
 
 :root {
-  --factory-bg: #fff7e8;
-  --factory-dark: #1d2540;
-  --factory-purple: #5b22a8;
-  --factory-purple-2: #7a35d8;
-  --factory-yellow: #ffd23f;
-  --factory-orange: #ff8a00;
-  --factory-pink: #ff4f93;
-  --factory-blue: #22b8e8;
-  --factory-green: #35c759;
-  --factory-paper: #fffaf0;
+  --factory-bg: #FFF7E8;
+  --factory-dark: #1D2540;
+  --factory-purple: #5B22A8;
+  --factory-yellow: #FFD23F;
+  --factory-orange: #FF8A00;
+  --factory-pink: #FF4F93;
+  --factory-blue: #22B8E8;
+  --factory-green: #35C759;
+  --factory-paper: #FFF8ED;
 }
 
-/* Fundo geral das telas funcionais */
+/* ================================
+   FUNDO DAS TELAS
+================================ */
+
 .game-screen {
   width: 100%;
-  height: 100%;
   min-height: 100vh;
+
   background:
-    radial-gradient(circle at 8% 18%, rgba(255, 210, 63, 0.20), transparent 18%),
-    radial-gradient(circle at 92% 12%, rgba(255, 79, 147, 0.14), transparent 16%),
-    radial-gradient(circle at 85% 88%, rgba(34, 184, 232, 0.14), transparent 18%),
+    radial-gradient(circle at 10% 20%, rgba(255, 210, 63, 0.2), transparent 20%),
+    radial-gradient(circle at 90% 10%, rgba(255, 79, 147, 0.15), transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(34, 184, 232, 0.15), transparent 20%),
     var(--factory-bg);
+
   color: var(--factory-dark);
-  overflow: hidden;
 }
 
-/* Títulos */
+/* ================================
+   TÍTULOS
+================================ */
+
 .game-title {
   color: var(--factory-purple);
   font-weight: 900;
-  letter-spacing: -0.02em;
-  text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(29, 37, 64, 0.12);
+  text-shadow: 2px 2px 0 #fff;
 }
 
-.game-kicker {
-  color: #08737c;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
+/* ================================
+   CARDS DAS ROLETA
+================================ */
 
-/* Barra/etiqueta tipo fábrica */
-.factory-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--factory-purple);
-  color: white;
-  border: 4px solid var(--factory-yellow);
-  border-radius: 22px;
-  padding: 10px 28px;
-  font-weight: 900;
-  box-shadow: 0 6px 0 var(--factory-dark);
-}
-
-/* Cards das roletas */
-.wheel-card,
-.roulette-card {
-  position: relative;
+.wheel-card {
   background: white;
   border: 4px solid var(--factory-dark);
-  border-radius: 28px;
-  box-shadow: 0 10px 0 var(--factory-dark), 0 18px 28px rgba(29, 37, 64, 0.18);
-  overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 8px 0 var(--factory-dark);
+  text-align: center;
 }
 
-.wheel-card:hover,
-.roulette-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 0 var(--factory-dark), 0 24px 34px rgba(29, 37, 64, 0.20);
-}
+/* CORES POR CATEGORIA */
 
-/* Aba superior do card */
-.wheel-card-title,
-.roulette-card-title {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 160px;
-  margin: 12px auto 4px;
-  padding: 8px 16px;
-  border: 3px solid var(--factory-dark);
-  border-radius: 999px;
-  background: white;
-  color: var(--factory-dark);
-  font-weight: 900;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  box-shadow: 0 4px 0 var(--factory-dark);
-}
+.card-personagens { background: linear-gradient(#FF4F93, #F73F87); }
+.card-cenarios { background: linear-gradient(#22B8E8, #159FCD); }
+.card-amigos { background: linear-gradient(#7A35D8, #6625C2); }
+.card-viloes { background: linear-gradient(#FF8A00, #EF7400); }
+.card-emocoes { background: linear-gradient(#FFD23F, #F5B82E); }
 
-/* Cores por categoria */
-.card-personagens { background: linear-gradient(#ff4f93, #f73f87); }
-.card-cenarios { background: linear-gradient(#22b8e8, #159fcd); }
-.card-amigos { background: linear-gradient(#7a35d8, #6625c2); }
-.card-viloes { background: linear-gradient(#ff8a00, #ef7400); }
-.card-emocoes { background: linear-gradient(#ffd23f, #f5b82e); }
+/* ================================
+   ROLETA
+================================ */
 
-/* Área da roleta */
 .roulette-wheel-wrap {
   position: relative;
-  width: 190px;
-  height: 190px;
-  margin: 18px auto;
-  filter: drop-shadow(0 10px 0 rgba(29, 37, 64, 0.28));
+  width: 160px;
+  height: 160px;
+  margin: 16px auto;
 }
 
-/* Roleta CSS */
+/* CORREÇÃO CRÍTICA AQUI 👇 */
 .roulette-wheel {
+  position: relative; /* ESSENCIAL */
   width: 100%;
   height: 100%;
   border-radius: 50%;
   border: 8px solid var(--factory-dark);
-  background:
-    conic-gradient(
-      #ff8a00 0deg 60deg,
-      #ffd23f 60deg 120deg,
-      #22b8e8 120deg 180deg,
-      #ffb6c8 180deg 240deg,
-      #35c759 240deg 300deg,
-      #b56be8 300deg 360deg
-    );
-  box-shadow:
-    inset 0 0 0 6px rgba(255, 255, 255, 0.65),
-    0 0 0 4px #ffffff;
-  transition: transform 2s cubic-bezier(.16,.84,.18,1);
+
+  background: conic-gradient(
+    #FF8A00 0deg 60deg,
+    #FFD23F 60deg 120deg,
+    #22B8E8 120deg 180deg,
+    #FF4F93 180deg 240deg,
+    #35C759 240deg 300deg,
+    #7A35D8 300deg 360deg
+  );
+
+  transition: transform 2s ease-out;
 }
 
-/* Centro da roleta */
+/* CENTRO DA ROLETA */
+
 .roulette-wheel::after {
   content: "";
   position: absolute;
-  inset: 50%;
-  width: 34px;
-  height: 34px;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
   background: var(--factory-dark);
-  border: 6px solid white;
+  border: 5px solid white;
   border-radius: 50%;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.25);
+  transform: translate(-50%, -50%);
 }
 
-/* Ponteiro */
+/* PONTEIRO */
+
 .roulette-pointer {
   position: absolute;
-  top: -6px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
+
   width: 0;
   height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-top: 34px solid var(--factory-yellow);
-  filter: drop-shadow(0 3px 0 var(--factory-dark));
-  z-index: 2;
+
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid var(--factory-yellow);
 }
 
-/* Resultado sorteado */
-.result-chip {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--factory-paper);
-  border: 4px solid var(--factory-dark);
-  border-radius: 18px;
-  padding: 10px 12px;
-  box-shadow: 0 5px 0 var(--factory-dark);
-  transform: rotate(-2deg);
-}
-
-.result-chip img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  background: white;
-  border-radius: 12px;
-}
-
-/* Botões */
-.btn-factory,
-.btn-pop,
-.btn-purple {
-  border: 4px solid white;
-  border-radius: 999px;
-  font-weight: 900;
-  color: white;
-  box-shadow: 0 7px 0 var(--factory-dark), 0 14px 24px rgba(0,0,0,0.18);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-factory:hover,
-.btn-pop:hover,
-.btn-purple:hover {
-  transform: translateY(-2px) scale(1.03);
-}
-
-.btn-factory:active,
-.btn-pop:active,
-.btn-purple:active {
-  transform: translateY(4px);
-  box-shadow: 0 3px 0 var(--factory-dark);
-}
+/* ================================
+   BOTÕES
+================================ */
 
 .btn-pop {
   background: var(--factory-green);
+  color: white;
+  font-weight: bold;
+  border-radius: 999px;
+  padding: 12px 24px;
+  border: 4px solid white;
+  box-shadow: 0 5px 0 var(--factory-dark);
 }
 
 .btn-purple {
   background: var(--factory-purple);
-}
-
-.btn-orange {
-  background: var(--factory-orange);
-}
-
-/* Barra inferior */
-.bottom-bar {
-  background: var(--factory-dark);
-  border-top: 5px solid var(--factory-yellow);
-  padding: 16px 28px;
+  color: white;
+  font-weight: bold;
+  border-radius: 999px;
+  padding: 12px 24px;
+  border: 4px solid white;
+  box-shadow: 0 5px 0 var(--factory-dark);
 }
 
 /* ================================
    TELA DE ESCRITA
-   ================================ */
+================================ */
 
 .story-layout {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 28px;
-  height: calc(100% - 150px);
-  padding: 0 28px;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  padding: 20px;
 }
 
-/* Painel dos ingredientes */
+/* PAINEL ESQUERDO */
+
 .ingredients-panel {
   background: var(--factory-purple);
-  border: 5px solid var(--factory-dark);
-  border-radius: 28px;
-  box-shadow: 0 10px 0 var(--factory-dark);
-  padding: 22px;
-}
-
-.ingredients-title {
-  display: inline-flex;
-  background: var(--factory-yellow);
-  color: var(--factory-dark);
   border: 4px solid var(--factory-dark);
-  border-radius: 999px;
-  padding: 8px 24px;
-  font-weight: 900;
-  text-transform: uppercase;
-  box-shadow: 0 5px 0 var(--factory-dark);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 8px 0 var(--factory-dark);
 }
 
-/* Cartões dos sorteios */
+/* CARDS DOS ITENS */
+
 .ingredient-card {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 14px;
+
   background: var(--factory-paper);
-  border: 4px solid var(--factory-dark);
-  border-radius: 18px;
-  padding: 10px 12px;
-  margin: 14px 0;
-  box-shadow: 0 5px 0 rgba(29, 37, 64, 0.9);
+  border: 3px solid var(--factory-dark);
+  border-radius: 16px;
+
+  padding: 10px;
+  margin-bottom: 10px;
+
+  box-shadow: 0 4px 0 var(--factory-dark);
 }
 
 .ingredient-card img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  background: white;
-  border-radius: 12px;
-  border: 2px solid rgba(29, 37, 64, 0.18);
+  width: 50px;
+  height: 50px;
 }
 
-.ingredient-label {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: white;
-}
-
-/* Área dos textos */
-.story-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
+/* CAMPOS DE TEXTO */
 
 .story-field {
   position: relative;
+
   background: var(--factory-paper);
-  border: 5px solid var(--factory-dark);
-  border-radius: 24px;
-  box-shadow: 0 8px 0 var(--factory-dark);
-  padding: 32px 18px 14px;
-  min-height: 170px;
+  border: 4px solid var(--factory-dark);
+  border-radius: 20px;
+
+  padding: 24px;
+  box-shadow: 0 6px 0 var(--factory-dark);
 }
 
 .story-field-tag {
   position: absolute;
-  top: -24px;
-  left: 28px;
-  padding: 8px 28px;
-  border: 4px solid var(--factory-dark);
-  border-radius: 999px;
-  color: var(--factory-dark);
-  font-weight: 900;
-  box-shadow: 0 5px 0 var(--factory-dark);
-}
+  top: -15px;
+  left: 20px;
 
-.tag-comeco { background: var(--factory-yellow); }
-.tag-meio { background: var(--factory-pink); color: white; }
-.tag-final { background: var(--factory-green); color: white; }
+  background: var(--factory-yellow);
+  border: 3px solid var(--factory-dark);
+  border-radius: 999px;
+
+  padding: 6px 16px;
+  font-weight: bold;
+}
 
 .story-textarea {
   width: 100%;
-  height: 100%;
-  min-height: 120px;
+  height: 120px;
   resize: none;
+
   border: none;
   outline: none;
+
+  font-size: 18px;
+
   background:
     repeating-linear-gradient(
       to bottom,
       transparent 0px,
-      transparent 31px,
-      rgba(29, 37, 64, 0.10) 32px
+      transparent 30px,
+      rgba(0,0,0,0.1) 31px
     );
-  font-size: 1.25rem;
-  line-height: 32px;
-  font-weight: 700;
-  color: var(--factory-dark);
 }
 
-.story-textarea::placeholder {
-  color: rgba(29, 37, 64, 0.35);
-}
+/* ================================
+   RESPONSIVO
+================================ */
 
-/* Responsivo */
-@media (max-width: 1100px) {
-  .roulette-wheel-wrap {
-    width: 150px;
-    height: 150px;
-  }
-
+@media (max-width: 900px) {
   .story-layout {
-    grid-template-columns: 300px 1fr;
-    gap: 18px;
+    grid-template-columns: 1fr;
   }
 }
