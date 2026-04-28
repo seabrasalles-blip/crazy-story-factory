@@ -6,34 +6,45 @@ type Props = {
   nextLabel?: string;
 };
 
-/**
- * AssetScreen: usa um asset de tela cheia como fundo e adiciona apenas
- * os botões de navegação na faixa inferior, fora da arte.
- */
-export const AssetScreen = ({ image, alt, onNext, onBack, nextLabel = "Seguir" }: Props) => {
+export const AssetScreen = ({
+  image,
+  alt,
+  onNext,
+  onBack,
+  nextLabel = "Seguir",
+}: Props) => {
   return (
-  <div className="absolute bottom-6 left-0 w-full px-6 z-10">
-  <div className="flex justify-between items-center max-w-[1200px] mx-auto">
-    
-    {/* BOTÃO VOLTAR */}
-    {onBack && (
-      <button
-        onClick={onBack}
-        className="btn-purple hover:scale-105 transition"
-        aria-label="Voltar"
-      >
-        ← Voltar
-      </button>
-    )}
+    <div className="w-full h-full relative bg-white animate-fade-in overflow-hidden">
+      <img
+        src={image}
+        alt={alt}
+        className="absolute inset-0 w-full h-full object-contain"
+        draggable={false}
+      />
 
-    {/* BOTÃO SEGUIR */}
-    <button
-      onClick={onNext}
-      className="btn-pop hover:scale-105 transition"
-      aria-label={nextLabel}
-    >
-      {nextLabel} →
-    </button>
+      <div className="absolute bottom-6 left-0 w-full px-6 z-10">
+        <div className="flex justify-between items-center max-w-[1200px] mx-auto">
+          <div>
+            {onBack && (
+              <button
+                onClick={onBack}
+                className="btn-purple hover:scale-105 transition"
+                aria-label="Voltar"
+              >
+                ← Voltar
+              </button>
+            )}
+          </div>
 
-  </div>
-</div>
+          <button
+            onClick={onNext}
+            className="btn-pop hover:scale-105 transition"
+            aria-label={nextLabel}
+          >
+            {nextLabel} →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
