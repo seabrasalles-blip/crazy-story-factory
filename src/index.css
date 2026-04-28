@@ -4,273 +4,365 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fábrica de Histórias Malucas — Direção de arte fechada
-   Paleta oficial:
-   #4B1C8C roxo profundo · #7A35D8 roxo médio · #FFD23F amarelo
-   #FF8A00 laranja · #35C759 verde · #22B8E8 azul mágico
-   #FF4F93 rosa · #FFF7E8 off-white · #1D2540 contorno
-*/
+/* ================================
+   FÁBRICA DE HISTÓRIAS — VISUAL BASE
+   ================================ */
 
-@layer base {
-  :root {
-    /* Paleta oficial em HSL */
-    --roxo-profundo: 263 67% 33%;
-    --roxo-medio:    269 67% 53%;
-    --amarelo:       47 100% 62%;
-    --laranja:       33 100% 50%;
-    --verde:         142 56% 49%;
-    --azul-magico:   194 80% 53%;
-    --rosa:          334 100% 66%;
-    --off-white:     38 100% 95%;
-    --contorno:      222 38% 19%;
-
-    /* Tokens semânticos */
-    --background: var(--off-white);
-    --foreground: var(--contorno);
-
-    --card: 0 0% 100%;
-    --card-foreground: var(--contorno);
-
-    --popover: 0 0% 100%;
-    --popover-foreground: var(--contorno);
-
-    --primary: var(--roxo-profundo);
-    --primary-foreground: var(--off-white);
-
-    --secondary: var(--amarelo);
-    --secondary-foreground: var(--contorno);
-
-    --muted: 260 30% 95%;
-    --muted-foreground: 258 25% 45%;
-
-    --accent: var(--azul-magico);
-    --accent-foreground: var(--contorno);
-
-    --success: var(--verde);
-    --success-foreground: 0 0% 100%;
-
-    --magenta: var(--rosa);
-    --magenta-foreground: 0 0% 100%;
-
-    --orange: var(--laranja);
-    --orange-foreground: 0 0% 100%;
-
-    --destructive: 0 80% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 260 30% 88%;
-    --input: 260 30% 92%;
-    --ring: var(--roxo-medio);
-
-    --radius: 1.5rem;
-
-    /* Fatias da roleta — paleta oficial */
-    --slice-1: var(--laranja);
-    --slice-2: var(--amarelo);
-    --slice-3: var(--azul-magico);
-    --slice-4: var(--verde);
-    --slice-5: var(--rosa);
-    --slice-6: var(--roxo-medio);
-
-    /* Cores temáticas das categorias */
-    --theme-personagens: var(--rosa);
-    --theme-cenarios:    var(--azul-magico);
-    --theme-amigos:      var(--roxo-medio);
-    --theme-viloes:      var(--laranja);
-    --theme-emocoes:     var(--amarelo);
-
-    --shadow-stack: 0 6px 0 hsl(var(--contorno));
-    --shadow-soft:  0 16px 30px hsl(var(--roxo-profundo) / 0.25);
-    --shadow-pop:   var(--shadow-stack), var(--shadow-soft);
-  }
+:root {
+  --factory-bg: #fff7e8;
+  --factory-dark: #1d2540;
+  --factory-purple: #5b22a8;
+  --factory-purple-2: #7a35d8;
+  --factory-yellow: #ffd23f;
+  --factory-orange: #ff8a00;
+  --factory-pink: #ff4f93;
+  --factory-blue: #22b8e8;
+  --factory-green: #35c759;
+  --factory-paper: #fffaf0;
 }
 
-@layer base {
-  * { @apply border-border; }
-
-  html, body, #root { height: 100%; }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Fredoka', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow: hidden;
-  }
-
-  h1, h2, h3, h4, .font-display {
-    font-family: 'Baloo 2', 'Fredoka', cursive;
-    letter-spacing: 0.01em;
-  }
+/* Fundo geral das telas funcionais */
+.game-screen {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(255, 210, 63, 0.20), transparent 18%),
+    radial-gradient(circle at 92% 12%, rgba(255, 79, 147, 0.14), transparent 16%),
+    radial-gradient(circle at 85% 88%, rgba(34, 184, 232, 0.14), transparent 18%),
+    var(--factory-bg);
+  color: var(--factory-dark);
+  overflow: hidden;
 }
 
-@layer components {
-  /* ===== Botões "pop sticker" ===== */
-
-  /* Primário (verde) — ações principais */
-  .btn-pop {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-display font-extrabold text-xl;
-    @apply text-white transition-all duration-150;
-    background: linear-gradient(180deg, hsl(var(--verde)) 0%, hsl(142 56% 40%) 100%);
-    border: 3px solid hsl(var(--off-white));
-    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 12px 22px hsl(var(--contorno) / 0.35);
-  }
-  .btn-pop:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 hsl(var(--contorno)), 0 14px 24px hsl(var(--contorno) / 0.4); }
-  .btn-pop:active { transform: translateY(6px);  box-shadow: 0 0 0 hsl(var(--contorno)); }
-  .btn-pop:disabled {
-    background: linear-gradient(180deg, hsl(0 0% 70%), hsl(0 0% 55%));
-    box-shadow: 0 4px 0 hsl(0 0% 30%);
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Roxo — voltar */
-  .btn-purple {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg;
-    @apply text-white transition-all duration-150;
-    background: linear-gradient(180deg, hsl(var(--roxo-medio)) 0%, hsl(var(--roxo-profundo)) 100%);
-    border: 3px solid hsl(var(--off-white));
-    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
-  }
-  .btn-purple:hover  { transform: translateY(-2px); }
-  .btn-purple:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
-
-  /* Amarelo — sortear / destaque */
-  .btn-yellow {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg;
-    @apply transition-all duration-150;
-    color: hsl(var(--contorno));
-    background: linear-gradient(180deg, hsl(var(--amarelo)) 0%, hsl(40 100% 52%) 100%);
-    border: 3px solid hsl(var(--off-white));
-    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
-  }
-  .btn-yellow:hover  { transform: translateY(-2px); }
-  .btn-yellow:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
-  .btn-yellow:disabled {
-    background: linear-gradient(180deg, hsl(0 0% 80%), hsl(0 0% 65%));
-    color: hsl(0 0% 40%);
-    box-shadow: 0 4px 0 hsl(0 0% 40%);
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Magenta — imprimir */
-  .btn-magenta {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg text-white;
-    @apply transition-all duration-150;
-    background: linear-gradient(180deg, hsl(var(--rosa)) 0%, hsl(334 100% 55%) 100%);
-    border: 3px solid hsl(var(--off-white));
-    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
-  }
-  .btn-magenta:hover  { transform: translateY(-2px); }
-  .btn-magenta:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
-
-  /* Card cartoon */
-  .pop-card {
-    @apply bg-card rounded-3xl p-4;
-    border: 4px solid hsl(var(--contorno));
-    box-shadow: var(--shadow-pop);
-  }
-
-  /* Sticker etiqueta inclinada */
-  .sticker {
-    @apply inline-block px-4 py-1 font-display font-extrabold text-white;
-    border: 3px solid hsl(var(--contorno));
-    border-radius: 999px;
-    box-shadow: 0 3px 0 hsl(var(--contorno));
-  }
-
-  .stage {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-  }
+/* Títulos */
+.game-title {
+  color: var(--factory-purple);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(29, 37, 64, 0.12);
 }
 
-@layer utilities {
-  /* Fundo "fábrica" — gradiente roxo + poeira mágica */
-  .bg-fabrica {
-    background:
-      radial-gradient(2px 2px at 12% 22%, hsl(var(--off-white) / .7), transparent 60%),
-      radial-gradient(2px 2px at 78% 18%, hsl(var(--amarelo) / .9), transparent 60%),
-      radial-gradient(2px 2px at 32% 78%, hsl(var(--off-white) / .55), transparent 60%),
-      radial-gradient(2px 2px at 86% 70%, hsl(var(--rosa) / .8), transparent 60%),
-      radial-gradient(2px 2px at 55% 50%, hsl(var(--azul-magico) / .7), transparent 60%),
-      linear-gradient(140deg, hsl(var(--roxo-profundo)) 0%, hsl(var(--roxo-medio)) 100%);
-  }
-
-  /* Fundo "ateliê" — papel pautado quente */
-  .bg-atelie {
-    background-color: hsl(var(--off-white));
-    background-image:
-      repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .05) 0 1px, transparent 1px 28px),
-      radial-gradient(circle at 8% 8%,  hsl(var(--amarelo) / .15), transparent 22%),
-      radial-gradient(circle at 92% 92%, hsl(var(--rosa) / .12),    transparent 22%);
-  }
-
-  /* Painel de controle inferior (rodapé estilo console) */
-  .bg-painel {
-    background: linear-gradient(180deg, hsl(var(--contorno)) 0%, hsl(222 38% 12%) 100%);
-    border-top: 3px solid hsl(var(--amarelo));
-  }
-
-  .text-shadow-pop {
-    text-shadow: 0 2px 0 hsl(var(--contorno)), 0 4px 8px hsl(var(--contorno) / 0.5);
-  }
-
-  .text-stroke-dark {
-    -webkit-text-stroke: 1.5px hsl(var(--contorno));
-  }
-
-  .animate-spin-slow   { animation: spin 14s linear infinite; }
-  .animate-spin-slower { animation: spin 28s linear infinite reverse; }
-  .animate-twinkle     { animation: twinkle 2.4s ease-in-out infinite; }
-  .animate-pulse-soft  { animation: pulseSoft 1.6s ease-in-out infinite; }
-  .animate-led         { animation: pulseLed 1.6s ease-in-out infinite; }
-  .animate-bubble      { animation: bubble 3s ease-in infinite; }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: .3; transform: scale(.85); }
-    50% { opacity: 1; transform: scale(1.15); }
-  }
-  @keyframes pulseSoft {
-    0%, 100% { transform: translateY(0)   scale(1);    box-shadow: 0 6px 0 hsl(var(--contorno)); }
-    50%      { transform: translateY(-3px) scale(1.04); box-shadow: 0 9px 0 hsl(var(--contorno)); }
-  }
-  @keyframes pulseLed {
-    0%, 100% { opacity: .4; }
-    50%      { opacity: 1; }
-  }
-  @keyframes pop {
-    0%   { transform: scale(.6); opacity: 0; }
-    60%  { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); }
-  }
-  .animate-pop { animation: pop .4s ease-out; }
-
-  @keyframes bubble {
-    0%   { transform: translateY(0)    scale(.6); opacity: 0; }
-    20%  { opacity: 1; }
-    100% { transform: translateY(-70px) scale(1);  opacity: 0; }
-  }
+.game-kicker {
+  color: #08737c;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.12em;
 }
 
-/* ===== Print: somente .print-area (renderizada via portal no body) ===== */
-.print-area { display: none; }
+/* Barra/etiqueta tipo fábrica */
+.factory-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--factory-purple);
+  color: white;
+  border: 4px solid var(--factory-yellow);
+  border-radius: 22px;
+  padding: 10px 28px;
+  font-weight: 900;
+  box-shadow: 0 6px 0 var(--factory-dark);
+}
 
-@media print {
-  @page { size: A4; margin: 14mm; }
-  html, body {
-    height: auto !important;
-    overflow: visible !important;
-    background: white !important;
-    color: black !important;
+/* Cards das roletas */
+.wheel-card,
+.roulette-card {
+  position: relative;
+  background: white;
+  border: 4px solid var(--factory-dark);
+  border-radius: 28px;
+  box-shadow: 0 10px 0 var(--factory-dark), 0 18px 28px rgba(29, 37, 64, 0.18);
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.wheel-card:hover,
+.roulette-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 0 var(--factory-dark), 0 24px 34px rgba(29, 37, 64, 0.20);
+}
+
+/* Aba superior do card */
+.wheel-card-title,
+.roulette-card-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  margin: 12px auto 4px;
+  padding: 8px 16px;
+  border: 3px solid var(--factory-dark);
+  border-radius: 999px;
+  background: white;
+  color: var(--factory-dark);
+  font-weight: 900;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 0 var(--factory-dark);
+}
+
+/* Cores por categoria */
+.card-personagens { background: linear-gradient(#ff4f93, #f73f87); }
+.card-cenarios { background: linear-gradient(#22b8e8, #159fcd); }
+.card-amigos { background: linear-gradient(#7a35d8, #6625c2); }
+.card-viloes { background: linear-gradient(#ff8a00, #ef7400); }
+.card-emocoes { background: linear-gradient(#ffd23f, #f5b82e); }
+
+/* Área da roleta */
+.roulette-wheel-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin: 18px auto;
+  filter: drop-shadow(0 10px 0 rgba(29, 37, 64, 0.28));
+}
+
+/* Roleta CSS */
+.roulette-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 8px solid var(--factory-dark);
+  background:
+    conic-gradient(
+      #ff8a00 0deg 60deg,
+      #ffd23f 60deg 120deg,
+      #22b8e8 120deg 180deg,
+      #ffb6c8 180deg 240deg,
+      #35c759 240deg 300deg,
+      #b56be8 300deg 360deg
+    );
+  box-shadow:
+    inset 0 0 0 6px rgba(255, 255, 255, 0.65),
+    0 0 0 4px #ffffff;
+  transition: transform 2s cubic-bezier(.16,.84,.18,1);
+}
+
+/* Centro da roleta */
+.roulette-wheel::after {
+  content: "";
+  position: absolute;
+  inset: 50%;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  background: var(--factory-dark);
+  border: 6px solid white;
+  border-radius: 50%;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.25);
+}
+
+/* Ponteiro */
+.roulette-pointer {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 34px solid var(--factory-yellow);
+  filter: drop-shadow(0 3px 0 var(--factory-dark));
+  z-index: 2;
+}
+
+/* Resultado sorteado */
+.result-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--factory-paper);
+  border: 4px solid var(--factory-dark);
+  border-radius: 18px;
+  padding: 10px 12px;
+  box-shadow: 0 5px 0 var(--factory-dark);
+  transform: rotate(-2deg);
+}
+
+.result-chip img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: white;
+  border-radius: 12px;
+}
+
+/* Botões */
+.btn-factory,
+.btn-pop,
+.btn-purple {
+  border: 4px solid white;
+  border-radius: 999px;
+  font-weight: 900;
+  color: white;
+  box-shadow: 0 7px 0 var(--factory-dark), 0 14px 24px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-factory:hover,
+.btn-pop:hover,
+.btn-purple:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-factory:active,
+.btn-pop:active,
+.btn-purple:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 var(--factory-dark);
+}
+
+.btn-pop {
+  background: var(--factory-green);
+}
+
+.btn-purple {
+  background: var(--factory-purple);
+}
+
+.btn-orange {
+  background: var(--factory-orange);
+}
+
+/* Barra inferior */
+.bottom-bar {
+  background: var(--factory-dark);
+  border-top: 5px solid var(--factory-yellow);
+  padding: 16px 28px;
+}
+
+/* ================================
+   TELA DE ESCRITA
+   ================================ */
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 28px;
+  height: calc(100% - 150px);
+  padding: 0 28px;
+}
+
+/* Painel dos ingredientes */
+.ingredients-panel {
+  background: var(--factory-purple);
+  border: 5px solid var(--factory-dark);
+  border-radius: 28px;
+  box-shadow: 0 10px 0 var(--factory-dark);
+  padding: 22px;
+}
+
+.ingredients-title {
+  display: inline-flex;
+  background: var(--factory-yellow);
+  color: var(--factory-dark);
+  border: 4px solid var(--factory-dark);
+  border-radius: 999px;
+  padding: 8px 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 5px 0 var(--factory-dark);
+}
+
+/* Cartões dos sorteios */
+.ingredient-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--factory-paper);
+  border: 4px solid var(--factory-dark);
+  border-radius: 18px;
+  padding: 10px 12px;
+  margin: 14px 0;
+  box-shadow: 0 5px 0 rgba(29, 37, 64, 0.9);
+}
+
+.ingredient-card img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid rgba(29, 37, 64, 0.18);
+}
+
+.ingredient-label {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* Área dos textos */
+.story-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.story-field {
+  position: relative;
+  background: var(--factory-paper);
+  border: 5px solid var(--factory-dark);
+  border-radius: 24px;
+  box-shadow: 0 8px 0 var(--factory-dark);
+  padding: 32px 18px 14px;
+  min-height: 170px;
+}
+
+.story-field-tag {
+  position: absolute;
+  top: -24px;
+  left: 28px;
+  padding: 8px 28px;
+  border: 4px solid var(--factory-dark);
+  border-radius: 999px;
+  color: var(--factory-dark);
+  font-weight: 900;
+  box-shadow: 0 5px 0 var(--factory-dark);
+}
+
+.tag-comeco { background: var(--factory-yellow); }
+.tag-meio { background: var(--factory-pink); color: white; }
+.tag-final { background: var(--factory-green); color: white; }
+
+.story-textarea {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  resize: none;
+  border: none;
+  outline: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(29, 37, 64, 0.10) 32px
+    );
+  font-size: 1.25rem;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--factory-dark);
+}
+
+.story-textarea::placeholder {
+  color: rgba(29, 37, 64, 0.35);
+}
+
+/* Responsivo */
+@media (max-width: 1100px) {
+  .roulette-wheel-wrap {
+    width: 150px;
+    height: 150px;
   }
-  body > * { display: none !important; }
-  body > .print-area {
-    display: block !important;
-    position: static !important;
-    width: 100% !important;
-    background: white !important;
-    color: black !important;
+
+  .story-layout {
+    grid-template-columns: 300px 1fr;
+    gap: 18px;
   }
-  .no-print { display: none !important; }
 }
