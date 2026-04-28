@@ -4,11 +4,14 @@ type Props = { onStart: () => void };
 
 export const IntroScreen = ({ onStart }: Props) => {
   return (
-    <div className="w-full h-full relative animate-fade-in">
+    <div
+      className="w-full h-full relative animate-fade-in flex items-center justify-center"
+      style={{ background: "hsl(45 60% 98%)" }}
+    >
       <img
         src={tela1}
         alt="Uma Fábrica de Histórias Malucas"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-contain"
         draggable={false}
       />
       {/* Botão sobreposto sobre a área verde da capa */}
