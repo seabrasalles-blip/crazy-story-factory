@@ -4,47 +4,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fábrica de Histórias Malucas - Design System
-   Paleta inspirada nos assets enviados (roxo profundo, amarelo, ciano, magenta, verde).
-   Todas as cores em HSL.
+/* Fábrica de Histórias Malucas — Direção de arte fechada
+   Paleta oficial:
+   #4B1C8C roxo profundo · #7A35D8 roxo médio · #FFD23F amarelo
+   #FF8A00 laranja · #35C759 verde · #22B8E8 azul mágico
+   #FF4F93 rosa · #FFF7E8 off-white · #1D2540 contorno
 */
 
 @layer base {
   :root {
-    --background: 45 60% 98%;
-    --foreground: 258 55% 22%;
+    /* Paleta oficial em HSL */
+    --roxo-profundo: 263 67% 33%;
+    --roxo-medio:    269 67% 53%;
+    --amarelo:       47 100% 62%;
+    --laranja:       33 100% 50%;
+    --verde:         142 56% 49%;
+    --azul-magico:   194 80% 53%;
+    --rosa:          334 100% 66%;
+    --off-white:     38 100% 95%;
+    --contorno:      222 38% 19%;
+
+    /* Tokens semânticos */
+    --background: var(--off-white);
+    --foreground: var(--contorno);
 
     --card: 0 0% 100%;
-    --card-foreground: 258 55% 22%;
+    --card-foreground: var(--contorno);
 
     --popover: 0 0% 100%;
-    --popover-foreground: 258 55% 22%;
+    --popover-foreground: var(--contorno);
 
-    /* Roxo profundo do título */
-    --primary: 262 60% 35%;
-    --primary-foreground: 45 100% 96%;
+    --primary: var(--roxo-profundo);
+    --primary-foreground: var(--off-white);
 
-    /* Amarelo "etiqueta" */
-    --secondary: 44 95% 60%;
-    --secondary-foreground: 262 60% 25%;
+    --secondary: var(--amarelo);
+    --secondary-foreground: var(--contorno);
 
     --muted: 260 30% 95%;
     --muted-foreground: 258 25% 45%;
 
-    /* Ciano */
-    --accent: 184 70% 55%;
-    --accent-foreground: 262 60% 20%;
+    --accent: var(--azul-magico);
+    --accent-foreground: var(--contorno);
 
-    /* Verde botão */
-    --success: 130 55% 50%;
+    --success: var(--verde);
     --success-foreground: 0 0% 100%;
 
-    /* Magenta */
-    --magenta: 340 85% 62%;
+    --magenta: var(--rosa);
     --magenta-foreground: 0 0% 100%;
 
-    /* Laranja */
-    --orange: 28 95% 60%;
+    --orange: var(--laranja);
     --orange-foreground: 0 0% 100%;
 
     --destructive: 0 80% 60%;
@@ -52,39 +60,35 @@
 
     --border: 260 30% 88%;
     --input: 260 30% 92%;
-    --ring: 262 60% 45%;
+    --ring: var(--roxo-medio);
 
-    --radius: 1.25rem;
+    --radius: 1.5rem;
 
-    /* Cores das fatias da roleta */
-    --slice-1: 28 95% 65%;   /* laranja */
-    --slice-2: 50 95% 65%;   /* amarelo */
-    --slice-3: 200 80% 70%;  /* azul claro */
-    --slice-4: 140 55% 65%;  /* verde menta */
-    --slice-5: 340 75% 75%;  /* rosa */
-    --slice-6: 270 60% 78%;  /* lilás */
+    /* Fatias da roleta — paleta oficial */
+    --slice-1: var(--laranja);
+    --slice-2: var(--amarelo);
+    --slice-3: var(--azul-magico);
+    --slice-4: var(--verde);
+    --slice-5: var(--rosa);
+    --slice-6: var(--roxo-medio);
 
-    /* Cores temáticas dos cards de roleta */
-    --theme-personagens: 340 85% 65%;
-    --theme-cenarios: 184 70% 50%;
-    --theme-amigos: 262 70% 65%;
-    --theme-viloes: 28 95% 60%;
-    --theme-emocoes: 44 95% 58%;
+    /* Cores temáticas das categorias */
+    --theme-personagens: var(--rosa);
+    --theme-cenarios:    var(--azul-magico);
+    --theme-amigos:      var(--roxo-medio);
+    --theme-viloes:      var(--laranja);
+    --theme-emocoes:     var(--amarelo);
 
-    --shadow-pop: 0 8px 0 hsl(262 60% 25%), 0 12px 24px hsl(262 60% 25% / 0.25);
-    --shadow-card: 0 6px 0 hsl(262 30% 80%), 0 12px 28px hsl(262 40% 40% / 0.18);
-    --shadow-soft: 0 8px 24px hsl(262 40% 40% / 0.15);
+    --shadow-stack: 0 6px 0 hsl(var(--contorno));
+    --shadow-soft:  0 16px 30px hsl(var(--roxo-profundo) / 0.25);
+    --shadow-pop:   var(--shadow-stack), var(--shadow-soft);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
-  html, body, #root {
-    height: 100%;
-  }
+  html, body, #root { height: 100%; }
 
   body {
     @apply bg-background text-foreground;
@@ -100,119 +104,156 @@
 }
 
 @layer components {
-  /* Botão principal estilo "etiqueta verde" da capa */
+  /* ===== Botões "pop sticker" ===== */
+
+  /* Primário (verde) — ações principais */
   .btn-pop {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-display font-bold text-xl;
-    @apply text-white transition-transform duration-200 active:translate-y-1;
-    background: linear-gradient(180deg, hsl(var(--success)) 0%, hsl(130 55% 42%) 100%);
-    box-shadow: 0 6px 0 hsl(130 55% 30%), 0 12px 20px hsl(130 55% 30% / 0.35);
-    border: 3px solid hsl(45 100% 96%);
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-display font-extrabold text-xl;
+    @apply text-white transition-all duration-150;
+    background: linear-gradient(180deg, hsl(var(--verde)) 0%, hsl(142 56% 40%) 100%);
+    border: 3px solid hsl(var(--off-white));
+    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 12px 22px hsl(var(--contorno) / 0.35);
   }
-  .btn-pop:hover {
-    transform: translateY(-2px);
-  }
+  .btn-pop:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 hsl(var(--contorno)), 0 14px 24px hsl(var(--contorno) / 0.4); }
+  .btn-pop:active { transform: translateY(6px);  box-shadow: 0 0 0 hsl(var(--contorno)); }
   .btn-pop:disabled {
     background: linear-gradient(180deg, hsl(0 0% 70%), hsl(0 0% 55%));
+    box-shadow: 0 4px 0 hsl(0 0% 30%);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Roxo — voltar */
+  .btn-purple {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg;
+    @apply text-white transition-all duration-150;
+    background: linear-gradient(180deg, hsl(var(--roxo-medio)) 0%, hsl(var(--roxo-profundo)) 100%);
+    border: 3px solid hsl(var(--off-white));
+    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
+  }
+  .btn-purple:hover  { transform: translateY(-2px); }
+  .btn-purple:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
+
+  /* Amarelo — sortear / destaque */
+  .btn-yellow {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg;
+    @apply transition-all duration-150;
+    color: hsl(var(--contorno));
+    background: linear-gradient(180deg, hsl(var(--amarelo)) 0%, hsl(40 100% 52%) 100%);
+    border: 3px solid hsl(var(--off-white));
+    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
+  }
+  .btn-yellow:hover  { transform: translateY(-2px); }
+  .btn-yellow:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
+  .btn-yellow:disabled {
+    background: linear-gradient(180deg, hsl(0 0% 80%), hsl(0 0% 65%));
+    color: hsl(0 0% 40%);
     box-shadow: 0 4px 0 hsl(0 0% 40%);
     cursor: not-allowed;
     transform: none;
   }
 
-  .btn-purple {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-bold text-lg;
-    @apply text-white transition-transform duration-200 active:translate-y-1;
-    background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(262 60% 28%) 100%);
-    box-shadow: 0 5px 0 hsl(262 60% 22%), 0 10px 18px hsl(262 60% 22% / 0.3);
-    border: 3px solid hsl(45 100% 96%);
-  }
-  .btn-purple:hover { transform: translateY(-2px); }
-
-  .btn-yellow {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-bold text-lg;
-    @apply transition-transform duration-200 active:translate-y-1;
-    color: hsl(262 60% 22%);
-    background: linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(38 95% 52%) 100%);
-    box-shadow: 0 5px 0 hsl(28 80% 40%), 0 10px 18px hsl(28 80% 40% / 0.3);
-    border: 3px solid hsl(45 100% 96%);
-  }
-  .btn-yellow:hover { transform: translateY(-2px); }
-  .btn-yellow:disabled {
-    background: linear-gradient(180deg, hsl(0 0% 80%), hsl(0 0% 65%));
-    color: hsl(0 0% 40%);
-    box-shadow: 0 4px 0 hsl(0 0% 50%);
-    cursor: not-allowed;
-    transform: none;
-  }
-
+  /* Magenta — imprimir */
   .btn-magenta {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-bold text-lg text-white;
-    @apply transition-transform duration-200 active:translate-y-1;
-    background: linear-gradient(180deg, hsl(var(--magenta)) 0%, hsl(340 80% 50%) 100%);
-    box-shadow: 0 5px 0 hsl(340 80% 38%), 0 10px 18px hsl(340 80% 38% / 0.3);
-    border: 3px solid hsl(45 100% 96%);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-display font-extrabold text-lg text-white;
+    @apply transition-all duration-150;
+    background: linear-gradient(180deg, hsl(var(--rosa)) 0%, hsl(334 100% 55%) 100%);
+    border: 3px solid hsl(var(--off-white));
+    box-shadow: 0 6px 0 hsl(var(--contorno)), 0 10px 18px hsl(var(--contorno) / 0.35);
   }
-  .btn-magenta:hover { transform: translateY(-2px); }
+  .btn-magenta:hover  { transform: translateY(-2px); }
+  .btn-magenta:active { transform: translateY(6px); box-shadow: 0 0 0 hsl(var(--contorno)); }
 
-  /* Card estilo dos modelos */
+  /* Card cartoon */
   .pop-card {
     @apply bg-card rounded-3xl p-4;
-    border: 3px solid hsl(var(--border));
-    box-shadow: var(--shadow-card);
+    border: 4px solid hsl(var(--contorno));
+    box-shadow: var(--shadow-pop);
+  }
+
+  /* Sticker etiqueta inclinada */
+  .sticker {
+    @apply inline-block px-4 py-1 font-display font-extrabold text-white;
+    border: 3px solid hsl(var(--contorno));
+    border-radius: 999px;
+    box-shadow: 0 3px 0 hsl(var(--contorno));
   }
 
   .stage {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
   }
 }
 
 @layer utilities {
-  .bg-cream {
-    background-color: hsl(45 60% 98%);
-    background-image:
-      radial-gradient(hsl(262 30% 92%) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+  /* Fundo "fábrica" — gradiente roxo + poeira mágica */
+  .bg-fabrica {
+    background:
+      radial-gradient(2px 2px at 12% 22%, hsl(var(--off-white) / .7), transparent 60%),
+      radial-gradient(2px 2px at 78% 18%, hsl(var(--amarelo) / .9), transparent 60%),
+      radial-gradient(2px 2px at 32% 78%, hsl(var(--off-white) / .55), transparent 60%),
+      radial-gradient(2px 2px at 86% 70%, hsl(var(--rosa) / .8), transparent 60%),
+      radial-gradient(2px 2px at 55% 50%, hsl(var(--azul-magico) / .7), transparent 60%),
+      linear-gradient(140deg, hsl(var(--roxo-profundo)) 0%, hsl(var(--roxo-medio)) 100%);
   }
 
-  .bg-factory {
-    background-color: hsl(45 60% 98%);
+  /* Fundo "ateliê" — papel pautado quente */
+  .bg-atelie {
+    background-color: hsl(var(--off-white));
     background-image:
-      radial-gradient(hsl(262 40% 88%) 1.5px, transparent 1.5px),
-      radial-gradient(circle at 12% 18%, hsl(184 70% 80% / 0.35), transparent 38%),
-      radial-gradient(circle at 88% 22%, hsl(340 85% 85% / 0.35), transparent 38%),
-      radial-gradient(circle at 50% 95%, hsl(44 95% 80% / 0.35), transparent 45%);
-    background-size: 24px 24px, auto, auto, auto;
+      repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .05) 0 1px, transparent 1px 28px),
+      radial-gradient(circle at 8% 8%,  hsl(var(--amarelo) / .15), transparent 22%),
+      radial-gradient(circle at 92% 92%, hsl(var(--rosa) / .12),    transparent 22%);
+  }
+
+  /* Painel de controle inferior (rodapé estilo console) */
+  .bg-painel {
+    background: linear-gradient(180deg, hsl(var(--contorno)) 0%, hsl(222 38% 12%) 100%);
+    border-top: 3px solid hsl(var(--amarelo));
   }
 
   .text-shadow-pop {
-    text-shadow: 0 2px 0 hsl(262 60% 25%), 0 4px 8px hsl(262 60% 25% / 0.4);
+    text-shadow: 0 2px 0 hsl(var(--contorno)), 0 4px 8px hsl(var(--contorno) / 0.5);
   }
 
-  .animate-spin-slow { animation: spin 14s linear infinite; }
+  .text-stroke-dark {
+    -webkit-text-stroke: 1.5px hsl(var(--contorno));
+  }
+
+  .animate-spin-slow   { animation: spin 14s linear infinite; }
   .animate-spin-slower { animation: spin 28s linear infinite reverse; }
-  .animate-twinkle { animation: twinkle 2.4s ease-in-out infinite; }
-  .animate-pulse-soft { animation: pulseSoft 1.6s ease-in-out infinite; }
+  .animate-twinkle     { animation: twinkle 2.4s ease-in-out infinite; }
+  .animate-pulse-soft  { animation: pulseSoft 1.6s ease-in-out infinite; }
+  .animate-led         { animation: pulseLed 1.6s ease-in-out infinite; }
+  .animate-bubble      { animation: bubble 3s ease-in infinite; }
 
   @keyframes twinkle {
-    0%, 100% { opacity: .25; transform: scale(.85); }
-    50% { opacity: 1; transform: scale(1.1); }
+    0%, 100% { opacity: .3; transform: scale(.85); }
+    50% { opacity: 1; transform: scale(1.15); }
   }
   @keyframes pulseSoft {
-    0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 6px 0 hsl(28 80% 40%), 0 10px 18px hsl(28 80% 40% / .35); }
-    50% { transform: translateY(-3px) scale(1.03); box-shadow: 0 9px 0 hsl(28 80% 40%), 0 16px 22px hsl(28 80% 40% / .45); }
+    0%, 100% { transform: translateY(0)   scale(1);    box-shadow: 0 6px 0 hsl(var(--contorno)); }
+    50%      { transform: translateY(-3px) scale(1.04); box-shadow: 0 9px 0 hsl(var(--contorno)); }
+  }
+  @keyframes pulseLed {
+    0%, 100% { opacity: .4; }
+    50%      { opacity: 1; }
   }
   @keyframes pop {
-    0% { transform: scale(.6); opacity: 0; }
-    60% { transform: scale(1.1); opacity: 1; }
+    0%   { transform: scale(.6); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); }
   }
   .animate-pop { animation: pop .4s ease-out; }
+
+  @keyframes bubble {
+    0%   { transform: translateY(0)    scale(.6); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translateY(-70px) scale(1);  opacity: 0; }
+  }
 }
 
-/* Print: mostrar apenas .print-area (renderizada via portal no body) */
+/* ===== Print: somente .print-area (renderizada via portal no body) ===== */
 .print-area { display: none; }
 
 @media print {
@@ -223,9 +264,7 @@
     background: white !important;
     color: black !important;
   }
-  /* Esconde todos os filhos do body */
   body > * { display: none !important; }
-  /* Mostra apenas a área de impressão */
   body > .print-area {
     display: block !important;
     position: static !important;
