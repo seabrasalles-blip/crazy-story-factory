@@ -23,7 +23,7 @@ export const IntroScreen = ({ onStart }: Props) => {
           className="btn-pop absolute z-10 hover:scale-105 active:scale-95 transition-transform"
           style={{
             left: "50%",
-            top: "62%",
+            top: "67%",
             transform: "translate(-50%, -50%)",
             minWidth: 320,
             fontSize: 28,
