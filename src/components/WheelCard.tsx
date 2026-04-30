@@ -58,6 +58,7 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
     const winnerIndex = Math.floor(Math.random() * items.length);
     const turns = 5 + Math.floor(Math.random() * 3);
     const targetCenter = sliceAngle * winnerIndex + sliceAngle / 2;
+
     const finalRotation =
       rotation + turns * 360 + (360 - (rotation % 360)) - targetCenter;
 
@@ -147,9 +148,31 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
 
       <div className="mt-4 w-full flex flex-col items-center justify-center">
         {result ? (
-          <div className="result-chip">
-            <img src={result.image} alt={result.label} />
-            <strong>{result.label}</strong>
+          <div className="result-chip flex flex-col items-center gap-1">
+            <div
+              style={{
+                background: "white",
+                borderRadius: 12,
+                padding: 6,
+                border: "2px solid #1D2540",
+                boxShadow: "0 2px 0 #1D2540",
+              }}
+            >
+              <img
+                src={result.image}
+                alt={result.label}
+                style={{
+                  width: 80,
+                  height: 80,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </div>
+
+            <strong style={{ color: "white", textAlign: "center" }}>
+              {result.label}
+            </strong>
           </div>
         ) : (
           <button
