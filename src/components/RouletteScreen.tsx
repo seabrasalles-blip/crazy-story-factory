@@ -13,7 +13,7 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
   const count = Object.keys(results).length;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#FFF7E8" }}>
+   <div className="min-h-screen flex flex-col bg-white">
 
       {/* ===== TOPO ===== */}
       <div className="text-center pt-6 pb-2">
