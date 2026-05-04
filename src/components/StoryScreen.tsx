@@ -70,11 +70,11 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
           }}
         >
           <span className="font-display font-bold text-xs tracking-[0.25em]" style={{ color: "hsl(var(--amarelo))" }}>
-            ✦ MESA DO INVENTOR ✦
+            ✦ MESA DO ESCRITOR ✦
           </span>
         </div>
         <h1 className="font-display font-extrabold text-3xl leading-tight mt-1" style={{ color: "hsl(var(--roxo-profundo))" }}>
-          Monte a sua história com os ingredientes!
+          Monte a sua história com esses ingredientes!
         </h1>
       </div>
 
