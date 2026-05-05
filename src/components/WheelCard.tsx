@@ -75,8 +75,8 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
       className="wheel-card flex flex-col items-center justify-between"
       style={{
         background: `linear-gradient(180deg, ${mainColor} 0%, ${mainColor}dd 100%)`,
-        minHeight: 430,
         width: "100%",
+        flex: 1,
       }}
     >
       <div className="wheel-card-title">{category.title}</div>
