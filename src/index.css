@@ -243,6 +243,95 @@
 }
 
 /* ================================
+   ROULETTE SCREEN — POLISH
+================================ */
+
+.roulette-screen-bg {
+  position: relative;
+  background: linear-gradient(180deg, #FFF8ED 0%, #FFEEDB 100%);
+  overflow: hidden;
+}
+
+.roulette-screen-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 210, 63, 0.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 28%, rgba(255, 138, 0, 0.25) 0 2px, transparent 3px),
+    radial-gradient(circle at 25% 78%, rgba(122, 53, 216, 0.18) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 70% 85%, rgba(34, 184, 232, 0.22) 0 2px, transparent 3px),
+    radial-gradient(circle at 55% 12%, rgba(255, 79, 147, 0.18) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 45% 50%, rgba(255, 210, 63, 0.18) 0 1px, transparent 2px);
+  background-size: 280px 280px, 320px 320px, 240px 240px, 360px 360px, 220px 220px, 180px 180px;
+  opacity: 0.75;
+}
+
+.wheel-card-hover {
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 0 #1D2540, 0 8px 16px rgba(29, 37, 64, 0.15);
+}
+.wheel-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 0 #1D2540, 0 12px 22px rgba(29, 37, 64, 0.18);
+}
+
+@keyframes pop-in {
+  0%   { transform: scale(0.92); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop-in { animation: pop-in .35s cubic-bezier(.17,.67,.32,1.18) both; }
+
+@keyframes ready-pulse {
+  0%, 100% { box-shadow: 0 5px 0 #1D2540, 0 0 0 rgba(53, 199, 89, 0.5); }
+  50%      { box-shadow: 0 5px 0 #1D2540, 0 0 18px rgba(53, 199, 89, 0.7); }
+}
+.animate-ready-pulse { animation: ready-pulse 1.6s ease-in-out infinite; }
+
+.btn-game {
+  border: 4px solid white;
+  border-radius: 999px;
+  box-shadow: 0 5px 0 #1D2540;
+  font-weight: 700;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-game:hover:not(:disabled) { transform: scale(1.02); }
+.btn-game:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1D2540;
+}
+
+.hud-counter {
+  background: #1D2540;
+  color: #FFD23F;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  box-shadow:
+    inset 0 0 8px rgba(255, 210, 63, 0.25),
+    0 3px 0 rgba(0,0,0,0.18);
+  border: 2px solid rgba(255, 210, 63, 0.35);
+}
+
+.result-card {
+  background: white;
+  border: 3px solid #1D2540;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 3px 0 #1D2540;
+}
+
+.result-label {
+  color: white;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ================================
    RESPONSIVO
 ================================ */
 
