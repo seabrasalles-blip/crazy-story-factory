@@ -91,11 +91,11 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
           style={{
             transform: `rotate(${rotation}deg)`,
             transition: spinning
-              ? "transform 3.2s cubic-bezier(.17,.67,.32,1.18)"
-              : "none",
+              ? "transform 3.2s cubic-bezier(.17,.67,.32,1.18), filter .3s ease"
+              : "filter .3s ease",
             filter: spinning
-              ? "drop-shadow(0 6px 8px rgba(0,0,0,.35))"
-              : "drop-shadow(0 0 12px rgba(255, 210, 63, 0.8))",
+              ? "drop-shadow(0 0 14px rgba(255, 210, 63, 0.85))"
+              : "drop-shadow(0 0 8px rgba(255, 210, 63, 0.55))",
           }}
         >
           {items.map((_, i) => (
