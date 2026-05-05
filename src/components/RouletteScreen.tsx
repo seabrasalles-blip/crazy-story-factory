@@ -13,92 +13,176 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
   const count = Object.keys(results).length;
 
   return (
-    <div className="roulette-screen-bg h-screen overflow-hidden flex flex-col">
-      {/* ===== TOPO ===== */}
-      <div className="text-center pt-4 pb-1 relative z-10">
-        <h1 className="text-3xl font-extrabold text-[#5B22A8]">
-          🎡 Gire as roletas!
-        </h1>
-        <p className="text-sm text-[#1D2540] opacity-70">
-          Descubra os ingredientes da sua história
-        </p>
-      </div>
+    <div className="min-h-screen bg-white flex flex-col animate-fade-in overflow-hidden">
+      {/* CABEÇALHO */}
+      <header
+        style={{
+          background: "#FFFFFF",
+          borderBottom: "4px solid #1D2540",
+          boxShadow: "0 5px 0 #1D2540",
+          padding: "14px 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: 100 }} />
 
-      {/* ===== AREA DAS ROLETAS ===== */}
-      <div className="grid grid-cols-5 gap-5 px-6 flex-1 items-stretch py-3 relative z-10">
-        {CATEGORY_ORDER.map((key) => (
-          <div key={key} className="flex justify-center">
+          <div style={{ textAlign: "center" }}>
             <div
-              className="wheel-card-hover rounded-2xl p-4 border-4 border-[#1D2540] flex flex-col h-full w-full"
               style={{
-                background: getCardColor(key),
-                maxWidth: 220,
+                display: "inline-block",
+                background: "#5B22A8",
+                color: "#FFD23F",
+                padding: "6px 18px",
+                borderRadius: 999,
+                fontWeight: 900,
+                fontSize: 12,
+                letterSpacing: "0.12em",
+                boxShadow: "0 3px 0 #1D2540",
               }}
             >
-              {/* título */}
-              <div className="text-center font-bold text-white mb-2 text-sm uppercase">
-                {CATEGORIES[key].title}
-              </div>
-
-              {/* roleta */}
-              <div className="flex-1 flex">
-                <WheelCard
-                  category={CATEGORIES[key]}
-                  result={results[key] ?? null}
-                  onResult={(item) => onResult(key, item)}
-                />
-              </div>
+              FÁBRICA DE HISTÓRIAS
             </div>
+
+            <h1
+              style={{
+                margin: "6px 0 0",
+                fontSize: 32,
+                lineHeight: 1,
+                fontWeight: 900,
+                color: "#5B22A8",
+              }}
+            >
+              Gire as roletas!
+            </h1>
+
+            <p
+              style={{
+                margin: "4px 0 0",
+                fontSize: 15,
+                color: "#1D2540",
+                fontWeight: 700,
+                opacity: 0.75,
+              }}
+            >
+              Descubra os ingredientes da sua história
+            </p>
           </div>
-        ))}
-      </div>
 
-      {/* ===== RODAPÉ ===== */}
-      <div className="flex justify-between items-center px-6 py-3 relative z-10">
-        {/* VOLTAR */}
-        <button
-          onClick={onBack}
-          className="btn-game bg-[#5B22A8] text-white px-6 py-2"
-        >
-          ← Voltar
-        </button>
-
-        {/* CONTADOR HUD */}
-        <div className="hud-counter text-sm">
-          {count} / 5 ingredientes coletados
+          <div
+            style={{
+              width: 90,
+              height: 90,
+              borderRadius: "50%",
+              background: "#FFD23F",
+              border: "4px solid #1D2540",
+              boxShadow: "0 5px 0 #1D2540",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 40,
+            }}
+            aria-hidden="true"
+          >
+            🎡
+          </div>
         </div>
+      </header>
 
-        {/* ESCREVER */}
-        <button
-          onClick={onWrite}
-          disabled={!allDone}
-          className={`btn-game px-6 py-2 text-white ${
-            allDone
-              ? "bg-[#35C759] animate-ready-pulse"
-              : "bg-[#E5E7EB] !text-[#1D2540] opacity-90"
-          }`}
+      {/* ÁREA DAS ROLETA */}
+      <main
+        className="flex-1"
+        style={{
+          padding: "24px 28px 16px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1320,
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+            gap: 18,
+            alignItems: "stretch",
+          }}
         >
-          ✏️ Escrever história →
-        </button>
-      </div>
+          {CATEGORY_ORDER.map((key) => (
+            <WheelCard
+              key={key}
+              category={CATEGORIES[key]}
+              result={results[key] ?? null}
+              onResult={(item) => onResult(key, item)}
+            />
+          ))}
+        </div>
+      </main>
+
+      {/* RODAPÉ */}
+      <footer
+        style={{
+          background: "#FFFFFF",
+          borderTop: "4px solid #1D2540",
+          boxShadow: "0 -4px 0 rgba(29, 37, 64, 0.15)",
+          padding: "14px 28px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 16,
+          }}
+        >
+          <button
+            onClick={onBack}
+            className="btn-purple"
+            style={{
+              padding: "10px 24px",
+              fontSize: 16,
+            }}
+          >
+            ← Voltar
+          </button>
+
+          <div
+            style={{
+              background: "#1D2540",
+              color: "#FFD23F",
+              padding: "10px 22px",
+              borderRadius: 999,
+              fontWeight: 900,
+              border: "3px solid #FFD23F",
+              boxShadow: "inset 0 0 10px rgba(255, 210, 63, 0.35)",
+            }}
+          >
+            {count} / 5 ingredientes coletados
+          </div>
+
+          <button
+            onClick={onWrite}
+            disabled={!allDone}
+            className="btn-pop"
+            style={{
+              padding: "10px 26px",
+              fontSize: 16,
+              opacity: allDone ? 1 : 0.55,
+              cursor: allDone ? "pointer" : "not-allowed",
+            }}
+          >
+            ✏️ Escrever história →
+          </button>
+        </div>
+      </footer>
     </div>
   );
 };
-
-/* ===== CORES DOS CARDS ===== */
-function getCardColor(key: CategoryKey) {
-  switch (key) {
-    case "personagens":
-      return "#FF4F93";
-    case "cenarios":
-      return "#22B8E8";
-    case "amigos":
-      return "#7A35D8";
-    case "viloes":
-      return "#FF8A00";
-    case "emocoes":
-      return "#FFD23F";
-    default:
-      return "#999";
-  }
-}
