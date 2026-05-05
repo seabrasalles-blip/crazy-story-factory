@@ -75,8 +75,8 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
       className="wheel-card flex flex-col items-center justify-between"
       style={{
         background: `linear-gradient(180deg, ${mainColor} 0%, ${mainColor}dd 100%)`,
-        minHeight: 430,
         width: "100%",
+        flex: 1,
       }}
     >
       <div className="wheel-card-title">{category.title}</div>
@@ -91,11 +91,11 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
           style={{
             transform: `rotate(${rotation}deg)`,
             transition: spinning
-              ? "transform 3.2s cubic-bezier(.17,.67,.32,1.18)"
-              : "none",
+              ? "transform 3.2s cubic-bezier(.17,.67,.32,1.18), filter .3s ease"
+              : "filter .3s ease",
             filter: spinning
-              ? "drop-shadow(0 6px 8px rgba(0,0,0,.35))"
-              : "drop-shadow(0 0 12px rgba(255, 210, 63, 0.8))",
+              ? "drop-shadow(0 0 14px rgba(255, 210, 63, 0.85))"
+              : "drop-shadow(0 0 8px rgba(255, 210, 63, 0.55))",
           }}
         >
           {items.map((_, i) => (
@@ -148,16 +148,11 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
 
       <div className="mt-4 w-full flex flex-col items-center justify-center">
         {result ? (
-          <div className="result-chip flex flex-col items-center gap-1">
-            <div
-              style={{
-                background: "white",
-                borderRadius: 12,
-                padding: 6,
-                border: "2px solid #1D2540",
-                boxShadow: "0 2px 0 #1D2540",
-              }}
-            >
+          <div
+            key={result.label}
+            className="animate-pop-in flex flex-col items-center gap-1"
+          >
+            <div className="result-card">
               <img
                 src={result.image}
                 alt={result.label}
@@ -170,15 +165,13 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
               />
             </div>
 
-            <strong style={{ color: "white", textAlign: "center" }}>
-              {result.label}
-            </strong>
+            <strong className="result-label text-sm">{result.label}</strong>
           </div>
         ) : (
           <button
             onClick={spin}
             disabled={spinning}
-            className="btn-factory btn-orange px-5 py-2"
+            className="btn-game bg-[#FF8A00] text-white px-5 py-2"
           >
             {spinning ? "✨ Girando..." : "🎯 Girar"}
           </button>
