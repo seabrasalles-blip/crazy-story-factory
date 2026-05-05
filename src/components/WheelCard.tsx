@@ -148,16 +148,11 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
 
       <div className="mt-4 w-full flex flex-col items-center justify-center">
         {result ? (
-          <div className="result-chip flex flex-col items-center gap-1">
-            <div
-              style={{
-                background: "white",
-                borderRadius: 12,
-                padding: 6,
-                border: "2px solid #1D2540",
-                boxShadow: "0 2px 0 #1D2540",
-              }}
-            >
+          <div
+            key={result.label}
+            className="animate-pop-in flex flex-col items-center gap-1"
+          >
+            <div className="result-card">
               <img
                 src={result.image}
                 alt={result.label}
@@ -170,15 +165,13 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
               />
             </div>
 
-            <strong style={{ color: "white", textAlign: "center" }}>
-              {result.label}
-            </strong>
+            <strong className="result-label text-sm">{result.label}</strong>
           </div>
         ) : (
           <button
             onClick={spin}
             disabled={spinning}
-            className="btn-factory btn-orange px-5 py-2"
+            className="btn-game bg-[#FF8A00] text-white px-5 py-2"
           >
             {spinning ? "✨ Girando..." : "🎯 Girar"}
           </button>
