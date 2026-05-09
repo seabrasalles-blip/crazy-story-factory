@@ -30,9 +30,9 @@ style={{
         {CATEGORY_ORDER.map((key) => (
           <div key={key} className="bg-transparent flex flex-col items-center h-full w-full">
             {/* título da categoria */}
-            <div className="text-center font-extrabold text-[#5B22A8] mb-2 text-sm uppercase tracking-wide">
-              {CATEGORIES[key].title}
-            </div>
+         <div className="text-center font-extrabold text-black mb-3 text-xl uppercase tracking-wide">
+  {CATEGORIES[key].title}
+</div>
 
             {/* roleta sem card */}
             <div className="flex-1 w-full flex">
