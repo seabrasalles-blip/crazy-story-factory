@@ -30,9 +30,9 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
       />
 
       {/* ===== AREA DAS ROLETAS ===== */}
-      <div className="grid grid-cols-5 gap-5 px-6 flex-1 items-stretch py-3 relative z-10">
+      <section className="bg-transparent grid grid-cols-5 gap-5 px-6 flex-1 items-stretch py-3 relative z-10">
         {CATEGORY_ORDER.map((key) => (
-          <div key={key} className="flex flex-col items-center h-full w-full">
+          <div key={key} className="bg-transparent flex flex-col items-center h-full w-full">
             {/* título da categoria */}
             <div className="text-center font-extrabold text-[#5B22A8] mb-2 text-sm uppercase tracking-wide">
               {CATEGORIES[key].title}
