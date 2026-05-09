@@ -18,13 +18,13 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
       {/* ===== BANNER TOPO ===== */}
       <div
         className="w-full relative z-10"
-        style={{
-          backgroundImage: `url(${bannerRoletas})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          backgroundRepeat: "no-repeat",
-          height: "clamp(110px, 18vh, 180px)",
-        }}
+       style={{
+  backgroundImage: `url(${bannerRoletas})`,
+  backgroundSize: "100% 100%",
+  backgroundPosition: "center top",
+  backgroundRepeat: "no-repeat",
+  height: "320px",
+}}
         role="img"
         aria-label="Gire as roletas! Descubra os ingredientes da sua história"
       />
