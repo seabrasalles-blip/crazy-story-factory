@@ -48,7 +48,7 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
             </div>
           </div>
         ))}
-      </div>
+      </section>
 
       {/* ===== RODAPÉ ===== */}
       <div className="flex justify-between items-center px-6 py-3 relative z-10">
