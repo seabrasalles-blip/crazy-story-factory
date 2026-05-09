@@ -14,20 +14,16 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
   const count = Object.keys(results).length;
 
   return (
-    <div className="roulette-screen-bg h-screen overflow-hidden flex flex-col">
-      {/* ===== BANNER TOPO ===== */}
-      <div
-        className="w-full relative z-10"
-       style={{
-  backgroundImage: `url(${bannerRoletas})`,
-  backgroundSize: "100% 100%",
-  backgroundPosition: "center top",
-  backgroundRepeat: "no-repeat",
-  height: "320px",
-}}
-        role="img"
-        aria-label="Gire as roletas! Descubra os ingredientes da sua história"
-      />
+  <div
+  className="roulette-screen-bg h-screen overflow-hidden flex flex-col"
+  style={{
+    backgroundImage: `url(${bannerRoletas})`,
+    backgroundSize: "contain",
+    backgroundPosition: "top center",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "#ffffff",
+  }}
+>
 
       {/* ===== AREA DAS ROLETAS ===== */}
       <section className="bg-transparent grid grid-cols-5 gap-5 px-6 flex-1 items-stretch py-3 relative z-10">
