@@ -26,7 +26,7 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
 >
 
       {/* ===== AREA DAS ROLETAS ===== */}
-  <section className="bg-transparent grid grid-cols-5 gap-5 px-6 flex-1 items-start pt-[210px] relative z-10">
+  <section className="bg-transparent grid grid-cols-5 gap-5 px-6 flex-1 items-start pt-[240px] relative z-10">
         {CATEGORY_ORDER.map((key) => (
           <div key={key} className="bg-transparent flex flex-col items-center h-full w-full">
             {/* título da categoria */}
