@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
+import bannerEscrita from "@/assets/telas/telaescrita.png";
 
 export type StoryText = { inicio: string; meio: string; fim: string };
 
@@ -60,23 +61,18 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
         <path d="M12 2l2.6 6.6L22 10l-5.5 4.7L18.4 22 12 18 5.6 22l1.9-7.3L2 10l7.4-1.4z" fill="hsl(var(--azul-magico))" stroke="hsl(var(--contorno))" strokeWidth="1" />
       </svg>
 
-      <div className="px-6 pt-6 pb-2 relative">
-        <div
-          className="inline-flex items-center gap-2 px-4 py-1 rounded-full"
-          style={{
-            background: "hsl(var(--roxo-profundo))",
-            border: "2.5px solid hsl(var(--amarelo))",
-            transform: "rotate(-1deg)",
-          }}
-        >
-          <span className="font-display font-bold text-xs tracking-[0.25em]" style={{ color: "hsl(var(--amarelo))" }}>
-            ✦ MESA DO ESCRITOR ✦
-          </span>
-        </div>
-        <h1 className="font-display font-extrabold text-3xl leading-tight mt-1" style={{ color: "hsl(var(--roxo-profundo))" }}>
-          Monte a sua história com esses ingredientes!
-        </h1>
-      </div>
+      <div
+        className="w-full relative z-10"
+        style={{
+          backgroundImage: `url(${bannerEscrita})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          backgroundRepeat: "no-repeat",
+          height: "clamp(110px, 18vh, 180px)",
+        }}
+        role="img"
+        aria-label="Monte sua história! Use os ingredientes que você sorteou"
+      />
 
       <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pb-3 relative">
         {/* Sidebar — ingredientes */}
