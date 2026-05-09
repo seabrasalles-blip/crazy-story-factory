@@ -248,28 +248,13 @@
 
 .roulette-screen-bg {
   position: relative;
-  background: transparent;
+
+  background-image: url('/telaroletas.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+
   overflow: hidden;
-}
-
-.roulette-screen-bg::before {
-  display: none;
-}
-
-.roulette-screen-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at 12% 18%, rgba(255, 210, 63, 0.35) 0 2px, transparent 3px),
-    radial-gradient(circle at 82% 28%, rgba(255, 138, 0, 0.25) 0 2px, transparent 3px),
-    radial-gradient(circle at 25% 78%, rgba(122, 53, 216, 0.18) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 70% 85%, rgba(34, 184, 232, 0.22) 0 2px, transparent 3px),
-    radial-gradient(circle at 55% 12%, rgba(255, 79, 147, 0.18) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 45% 50%, rgba(255, 210, 63, 0.18) 0 1px, transparent 2px);
-  background-size: 280px 280px, 320px 320px, 240px 240px, 360px 360px, 220px 220px, 180px 180px;
-  opacity: 0.75;
 }
 
 .wheel-card-hover {
