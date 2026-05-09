@@ -248,8 +248,12 @@
 
 .roulette-screen-bg {
   position: relative;
-  background: linear-gradient(180deg, #FFF8ED 0%, #FFEEDB 100%);
+  background: transparent;
   overflow: hidden;
+}
+
+.roulette-screen-bg::before {
+  display: none;
 }
 
 .roulette-screen-bg::before {
