@@ -72,15 +72,9 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
 
   return (
     <div
-      className="wheel-card flex flex-col items-center justify-between"
-      style={{
-        background: `linear-gradient(180deg, ${mainColor} 0%, ${mainColor}dd 100%)`,
-        width: "100%",
-        flex: 1,
-      }}
+      className="flex flex-col items-center justify-between w-full"
+      style={{ flex: 1 }}
     >
-      <div className="wheel-card-title">{category.title}</div>
-
       <div className="relative" style={{ width: SIZE, height: SIZE + 8 }}>
         <div className="roulette-pointer" />
 
@@ -165,7 +159,7 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
               />
             </div>
 
-            <strong className="result-label text-sm">{result.label}</strong>
+            <strong className="text-sm font-extrabold text-[#1D2540] text-center">{result.label}</strong>
           </div>
         ) : (
           <button
@@ -181,7 +175,7 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
           <button
             onClick={spin}
             disabled={spinning}
-            className="mt-3 text-sm font-bold underline text-white"
+            className="mt-3 text-sm font-bold underline text-[#5B22A8]"
           >
             sortear de novo
           </button>

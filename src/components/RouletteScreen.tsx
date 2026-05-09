@@ -1,5 +1,6 @@
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
 import { WheelCard } from "./WheelCard";
+import bannerRoletas from "@/assets/telas/telaroletas.png";
 
 type Props = {
   results: Partial<Record<CategoryKey, Item>>;
@@ -13,176 +14,67 @@ export const RouletteScreen = ({ results, onResult, onWrite, onBack }: Props) =>
   const count = Object.keys(results).length;
 
   return (
-    <div className="min-h-screen bg-white flex flex-col animate-fade-in overflow-hidden">
-      {/* CABEÇALHO */}
-      <header
+    <div className="roulette-screen-bg h-screen overflow-hidden flex flex-col">
+      {/* ===== BANNER TOPO ===== */}
+      <div
+        className="w-full relative z-10"
         style={{
-          background: "#FFFFFF",
-          borderBottom: "4px solid #1D2540",
-          boxShadow: "0 5px 0 #1D2540",
-          padding: "14px 24px",
+          backgroundImage: `url(${bannerRoletas})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          backgroundRepeat: "no-repeat",
+          height: "clamp(110px, 18vh, 180px)",
         }}
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ width: 100 }} />
+        role="img"
+        aria-label="Gire as roletas! Descubra os ingredientes da sua história"
+      />
 
-          <div style={{ textAlign: "center" }}>
-            <div
-              style={{
-                display: "inline-block",
-                background: "#5B22A8",
-                color: "#FFD23F",
-                padding: "6px 18px",
-                borderRadius: 999,
-                fontWeight: 900,
-                fontSize: 12,
-                letterSpacing: "0.12em",
-                boxShadow: "0 3px 0 #1D2540",
-              }}
-            >
-              FÁBRICA DE HISTÓRIAS
+      {/* ===== AREA DAS ROLETAS ===== */}
+      <div className="grid grid-cols-5 gap-5 px-6 flex-1 items-stretch py-3 relative z-10">
+        {CATEGORY_ORDER.map((key) => (
+          <div key={key} className="flex flex-col items-center h-full w-full">
+            {/* título da categoria */}
+            <div className="text-center font-extrabold text-[#5B22A8] mb-2 text-sm uppercase tracking-wide">
+              {CATEGORIES[key].title}
             </div>
 
-            <h1
-              style={{
-                margin: "6px 0 0",
-                fontSize: 32,
-                lineHeight: 1,
-                fontWeight: 900,
-                color: "#5B22A8",
-              }}
-            >
-              Gire as roletas!
-            </h1>
-
-            <p
-              style={{
-                margin: "4px 0 0",
-                fontSize: 15,
-                color: "#1D2540",
-                fontWeight: 700,
-                opacity: 0.75,
-              }}
-            >
-              Descubra os ingredientes da sua história
-            </p>
+            {/* roleta sem card */}
+            <div className="flex-1 w-full flex">
+              <WheelCard
+                category={CATEGORIES[key]}
+                result={results[key] ?? null}
+                onResult={(item) => onResult(key, item)}
+              />
+            </div>
           </div>
+        ))}
+      </div>
 
-          <div
-            style={{
-              width: 90,
-              height: 90,
-              borderRadius: "50%",
-              background: "#FFD23F",
-              border: "4px solid #1D2540",
-              boxShadow: "0 5px 0 #1D2540",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-            }}
-            aria-hidden="true"
-          >
-            🎡
-          </div>
-        </div>
-      </header>
-
-      {/* ÁREA DAS ROLETA */}
-      <main
-        className="flex-1"
-        style={{
-          padding: "24px 28px 16px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1320,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-            gap: 18,
-            alignItems: "stretch",
-          }}
+      {/* ===== RODAPÉ ===== */}
+      <div className="flex justify-between items-center px-6 py-3 relative z-10">
+        <button
+          onClick={onBack}
+          className="btn-game bg-[#5B22A8] text-white px-6 py-2"
         >
-          {CATEGORY_ORDER.map((key) => (
-            <WheelCard
-              key={key}
-              category={CATEGORIES[key]}
-              result={results[key] ?? null}
-              onResult={(item) => onResult(key, item)}
-            />
-          ))}
-        </div>
-      </main>
+          ← Voltar
+        </button>
 
-      {/* RODAPÉ */}
-      <footer
-        style={{
-          background: "#FFFFFF",
-          borderTop: "4px solid #1D2540",
-          boxShadow: "0 -4px 0 rgba(29, 37, 64, 0.15)",
-          padding: "14px 28px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 16,
-          }}
+        <div className="hud-counter text-sm">
+          {count} / 5 ingredientes coletados
+        </div>
+
+        <button
+          onClick={onWrite}
+          disabled={!allDone}
+          className={`btn-game px-6 py-2 text-white ${
+            allDone
+              ? "bg-[#35C759] animate-ready-pulse"
+              : "bg-[#E5E7EB] !text-[#1D2540] opacity-90"
+          }`}
         >
-          <button
-            onClick={onBack}
-            className="btn-purple"
-            style={{
-              padding: "10px 24px",
-              fontSize: 16,
-            }}
-          >
-            ← Voltar
-          </button>
-
-          <div
-            style={{
-              background: "#1D2540",
-              color: "#FFD23F",
-              padding: "10px 22px",
-              borderRadius: 999,
-              fontWeight: 900,
-              border: "3px solid #FFD23F",
-              boxShadow: "inset 0 0 10px rgba(255, 210, 63, 0.35)",
-            }}
-          >
-            {count} / 5 ingredientes coletados
-          </div>
-
-          <button
-            onClick={onWrite}
-            disabled={!allDone}
-            className="btn-pop"
-            style={{
-              padding: "10px 26px",
-              fontSize: 16,
-              opacity: allDone ? 1 : 0.55,
-              cursor: allDone ? "pointer" : "not-allowed",
-            }}
-          >
-            ✏️ Escrever história →
-          </button>
-        </div>
-      </footer>
+          ✏️ Escrever história →
+        </button>
+      </div>
     </div>
   );
 };
