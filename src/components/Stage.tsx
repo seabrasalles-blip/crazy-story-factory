@@ -29,7 +29,7 @@ export const Stage = ({ children }: { children: React.ReactNode }) => {
           transform: `scale(${scale})`,
           transformOrigin: "center center",
         }}
-        className="relative shadow-soft rounded-3xl overflow-hidden bg-white"
+       className="relative shadow-soft rounded-3xl overflow-hidden bg-transparent"
       >
         {children}
       </div>
