@@ -30,7 +30,7 @@ style={{
         {CATEGORY_ORDER.map((key) => (
           <div key={key} className="bg-transparent flex flex-col items-center h-full w-full">
             {/* título da categoria */}
-         <div className="text-center font-extrabold text-black mb-3 text-xl uppercase tracking-wide">
+    <div className="text-center font-extrabold text-black mb-3 text-lg uppercase tracking-wide bg-white/90 px-3 py-1 rounded-full shadow-md border-2 border-[#1D2540]">
   {CATEGORIES[key].title}
 </div>
 
