@@ -4,6 +4,7 @@ import { IntroScreen } from "@/components/IntroScreen";
 import { AssetScreen } from "@/components/AssetScreen";
 import { RouletteScreen } from "@/components/RouletteScreen";
 import { StoryScreen, type StoryText } from "@/components/StoryScreen";
+import { StoryViewScreen } from "@/components/StoryViewScreen";
 import type { CategoryKey, Item } from "@/data/catalog";
 
 import tela2 from "@/assets/telas/tela2.png";
@@ -22,7 +23,8 @@ type ScreenId =
   | "cenarios"
   | "emocoes"
   | "roletas"
-  | "historia";
+  | "historia"
+  | "visualizacao";
 
 const FLOW: ScreenId[] = [
   "intro",
@@ -103,6 +105,16 @@ const Index = () => {
           story={story}
           onChange={setStory}
           onBack={() => setScreen("roletas")}
+          onRestart={restart}
+          onView={() => setScreen("visualizacao")}
+        />
+      )}
+
+      {screen === "visualizacao" && (
+        <StoryViewScreen
+          results={results}
+          story={story}
+          onBack={() => setScreen("historia")}
           onRestart={restart}
         />
       )}
