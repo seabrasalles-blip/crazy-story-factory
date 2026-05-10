@@ -50,31 +50,22 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
   const handlePrint = () => window.print();
 
   return (
-    <div className="w-full h-full bg-atelie flex flex-col animate-fade-in no-print relative overflow-hidden">
-      <PipeFrame />
+    <div
+      className="w-full h-full flex flex-col animate-fade-in no-print relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${bannerEscrita})`,
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center top",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "hsl(var(--off-white))",
+      }}
+      role="img"
+      aria-label="Monte sua história! Use os ingredientes que você sorteou"
+    >
+      {/* Espaçador do banner ilustrado */}
+      <div className="shrink-0" style={{ height: "clamp(170px, 30%, 240px)" }} />
 
-      {/* Estrelas decorativas */}
-      <svg className="absolute animate-twinkle" style={{ top: 22, right: 30, width: 16, height: 16 }} viewBox="0 0 24 24">
-        <path d="M12 2l2.6 6.6L22 10l-5.5 4.7L18.4 22 12 18 5.6 22l1.9-7.3L2 10l7.4-1.4z" fill="hsl(var(--rosa))" stroke="hsl(var(--contorno))" strokeWidth="1" />
-      </svg>
-      <svg className="absolute animate-twinkle" style={{ bottom: 80, left: 24, width: 14, height: 14, animationDelay: ".6s" }} viewBox="0 0 24 24">
-        <path d="M12 2l2.6 6.6L22 10l-5.5 4.7L18.4 22 12 18 5.6 22l1.9-7.3L2 10l7.4-1.4z" fill="hsl(var(--azul-magico))" stroke="hsl(var(--contorno))" strokeWidth="1" />
-      </svg>
-
-      <div
-        className="w-full relative z-10"
-        style={{
-          backgroundImage: `url(${bannerEscrita})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          backgroundRepeat: "no-repeat",
-          height: "clamp(110px, 18vh, 180px)",
-        }}
-        role="img"
-        aria-label="Monte sua história! Use os ingredientes que você sorteou"
-      />
-
-      <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pb-3 relative">
+      <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pt-2 pb-3 relative">
         {/* Sidebar — ingredientes */}
         <div
           className="col-span-4 rounded-3xl p-3 flex flex-col gap-2 overflow-hidden"
