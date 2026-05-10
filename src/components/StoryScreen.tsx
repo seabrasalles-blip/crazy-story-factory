@@ -62,10 +62,10 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
       role="img"
       aria-label="Monte sua história! Use os ingredientes que você sorteou"
     >
-      {/* Espaçador do banner ilustrado */}
-      <div className="shrink-0" style={{ height: "clamp(170px, 30%, 240px)" }} />
+      {/* Espaçador do banner ilustrado (empurra conteúdo abaixo da curva roxa) */}
+      <div className="shrink-0" style={{ height: "clamp(240px, 42%, 340px)" }} />
 
-      <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pt-2 pb-3 relative">
+      <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pt-4 pb-3 relative">
         {/* Sidebar — ingredientes */}
         <div
           className="col-span-4 rounded-3xl p-3 flex flex-col gap-2 overflow-hidden"
