@@ -98,32 +98,21 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
             return (
-              <div
-                key={k}
-                className="relative rounded-2xl px-5 pt-5 pb-3 flex flex-col"
-                style={{
-                  background: "hsl(var(--off-white))",
-                  backgroundImage:
-                    "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 30px)",
-                  border: "4px solid hsl(var(--contorno))",
-                  boxShadow: "0 5px 0 hsl(var(--contorno)), 0 12px 20px hsl(var(--contorno) / 0.18)",
-                  transform: `rotate(${idx === 1 ? 0.3 : -0.25}deg)`,
-                  minHeight: 110,
-                }}
-              >
+              <div key={k} className="flex-1 min-h-0 flex flex-col">
+                {/* Plaquinha cabeçalho */}
                 <div
-                  className="absolute -top-3.5 left-4 inline-flex items-center gap-1.5 px-3 py-1 font-display font-extrabold text-xs uppercase tracking-wider"
+                  className="self-start inline-flex items-center gap-2 px-4 py-1.5 mb-1.5 font-display font-extrabold text-sm uppercase tracking-wider"
                   style={{
                     background: "hsl(var(--off-white))",
                     color: `hsl(${cfg.color})`,
                     border: "3px solid hsl(var(--contorno))",
                     borderRadius: 999,
                     boxShadow: "0 3px 0 hsl(var(--contorno))",
-                    transform: `rotate(${idx === 1 ? 2 : -2}deg)`,
+                    transform: `rotate(${idx === 1 ? 1.5 : -1.5}deg)`,
                   }}
                 >
                   <span
-                    className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[11px]"
+                    className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs"
                     style={{
                       background: `hsl(${cfg.color})`,
                       color: "hsl(var(--off-white))",
@@ -135,18 +124,28 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
                   <span>{cfg.emoji} {cfg.title}</span>
                 </div>
 
-                <textarea
-                  value={story[k]}
-                  onChange={(e) => onChange({ ...story, [k]: e.target.value })}
-                  placeholder={cfg.placeholder}
-                  rows={3}
-                  className="w-full resize-none bg-transparent outline-none text-base font-medium leading-7 mt-1"
+                {/* Campo de escrita grande */}
+                <div
+                  className="flex-1 min-h-0 rounded-2xl p-3"
                   style={{
-                    color: "hsl(var(--contorno))",
-                    fontFamily: "'Fredoka', sans-serif",
-                    minHeight: 80,
+                    background: "hsl(var(--off-white))",
+                    backgroundImage:
+                      "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 32px)",
+                    border: "4px solid hsl(var(--contorno))",
+                    boxShadow: "0 5px 0 hsl(var(--contorno)), 0 12px 20px hsl(var(--contorno) / 0.18)",
                   }}
-                />
+                >
+                  <textarea
+                    value={story[k]}
+                    onChange={(e) => onChange({ ...story, [k]: e.target.value })}
+                    placeholder={cfg.placeholder}
+                    className="w-full h-full resize-none bg-transparent outline-none text-base font-medium leading-8"
+                    style={{
+                      color: "hsl(var(--contorno))",
+                      fontFamily: "'Fredoka', sans-serif",
+                    }}
+                  />
+                </div>
               </div>
             );
           })}
