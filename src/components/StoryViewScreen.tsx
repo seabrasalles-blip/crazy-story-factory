@@ -91,25 +91,25 @@ export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) =>
           </div>
         </div>
 
-        {/* Cartão da história */}
+        {/* Cartão da história — grande, tipo livro */}
         <div
-          className="flex-1 min-h-0 rounded-2xl p-5 overflow-y-auto"
+          className="flex-1 min-h-0 rounded-2xl px-8 py-6 overflow-y-auto"
           style={{
             background: "hsl(var(--off-white))",
             backgroundImage:
-              "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 28px)",
+              "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .06) 0 1px, transparent 1px 32px)",
             border: "4px solid hsl(var(--contorno))",
             boxShadow: "0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
           }}
         >
-          <div className="flex flex-col gap-3" style={{ fontFamily: "'Fredoka', sans-serif", color: "hsl(var(--contorno))" }}>
+          <div className="flex flex-col gap-4" style={{ fontFamily: "'Fredoka', sans-serif", color: "hsl(var(--contorno))" }}>
             {(Object.keys(FIELD_TITLE) as (keyof StoryText)[]).map((k) => {
               const cfg = FIELD_TITLE[k];
               const text = story[k]?.trim();
               return (
                 <section key={k}>
                   <div
-                    className="inline-block px-3 py-0.5 mb-1 rounded-full font-display font-extrabold text-xs uppercase tracking-wide"
+                    className="inline-block px-3 py-0.5 mb-2 rounded-full font-display font-extrabold text-xs uppercase tracking-wide"
                     style={{
                       background: `hsl(${cfg.color})`,
                       color: "hsl(var(--off-white))",
@@ -120,7 +120,7 @@ export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) =>
                     {cfg.emoji} {cfg.title}
                   </div>
                   <p
-                    className="text-base leading-7 whitespace-pre-wrap"
+                    className="text-lg leading-8 whitespace-pre-wrap"
                     style={{ color: text ? "hsl(var(--contorno))" : "hsl(var(--contorno) / 0.4)" }}
                   >
                     {text || "(em branco)"}

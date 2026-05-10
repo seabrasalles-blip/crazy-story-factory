@@ -329,3 +329,23 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ================================
+   IMPRESSÃO
+================================ */
+
+.print-area {
+  display: none;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  .print-area {
+    display: block !important;
+    position: static !important;
+    padding: 32px;
+    background: white;
+    color: #1D2540;
+  }
+  body { background: white !important; }
+}

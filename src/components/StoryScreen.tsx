@@ -44,68 +44,56 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
       <div className="shrink-0" style={{ height: "33%" }} />
 
       {/* Conteúdo dentro da área branca */}
-      <div className="flex-1 min-h-0 grid grid-cols-12 gap-5 px-8 pt-4 pb-2">
-        {/* Sidebar — ingredientes */}
-        <aside className="col-span-3 flex flex-col gap-2 min-h-0">
+      <div className="flex-1 min-h-0 flex flex-col gap-3 px-6 pt-3 pb-2">
+        {/* Faixa horizontal de ingredientes (compacta) */}
+        <div className="flex items-center gap-2 shrink-0">
           <div
-            className="px-3 py-1 rounded-full text-center font-display font-extrabold text-[11px] uppercase tracking-widest self-center"
+            className="px-2.5 py-1 rounded-full font-display font-extrabold text-[10px] uppercase tracking-widest shrink-0"
             style={{
               background: "hsl(var(--amarelo))",
               color: "hsl(var(--contorno))",
-              border: "2.5px solid hsl(var(--contorno))",
-              boxShadow: "0 3px 0 hsl(var(--contorno))",
+              border: "2px solid hsl(var(--contorno))",
+              boxShadow: "0 2px 0 hsl(var(--contorno))",
             }}
           >
             🎴 Ingredientes
           </div>
-
-          <div className="flex flex-col gap-1.5 overflow-hidden">
+          <div className="flex gap-1.5 flex-1 overflow-hidden">
             {CATEGORY_ORDER.map((key, idx) => {
               const item = results[key];
               if (!item) return null;
               return (
                 <div
                   key={key}
-                  className="flex items-center gap-2 rounded-xl p-1.5 animate-pop"
+                  className="flex items-center gap-1.5 rounded-lg px-1.5 py-0.5 animate-pop min-w-0 flex-1"
                   style={{
                     background: "hsl(var(--off-white))",
-                    border: "2.5px solid hsl(var(--contorno))",
+                    border: "2px solid hsl(var(--contorno))",
                     boxShadow: "0 2px 0 hsl(var(--contorno))",
                     transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
                   }}
+                  title={`${CATEGORIES[key].title}: ${item.label}`}
                 >
                   <div
-                    className="rounded-lg p-0.5 shrink-0"
+                    className="rounded-md p-0.5 shrink-0"
                     style={{
                       background: `hsl(${THEME[key]} / 0.25)`,
-                      border: "2px solid hsl(var(--contorno))",
+                      border: "1.5px solid hsl(var(--contorno))",
                     }}
                   >
-                    <img src={item.image} alt={item.label} className="w-9 h-9 object-contain" />
+                    <img src={item.image} alt={item.label} className="w-7 h-7 object-contain" />
                   </div>
-                  <div className="leading-tight min-w-0">
-                    <div
-                      className="inline-block px-1.5 py-0 rounded-full font-display font-extrabold text-[9px] uppercase tracking-wide"
-                      style={{
-                        background: `hsl(${THEME[key]})`,
-                        color: "hsl(var(--contorno))",
-                        border: "1.5px solid hsl(var(--contorno))",
-                      }}
-                    >
-                      {CATEGORIES[key].title}
-                    </div>
-                    <div className="font-display font-extrabold text-xs truncate" style={{ color: "hsl(var(--contorno))" }}>
-                      {item.label}
-                    </div>
+                  <div className="font-display font-extrabold text-[11px] truncate min-w-0" style={{ color: "hsl(var(--contorno))" }}>
+                    {item.label}
                   </div>
                 </div>
               );
             })}
           </div>
-        </aside>
+        </div>
 
-        {/* Centro — três campos confortáveis */}
-        <div className="col-span-9 grid grid-cols-3 gap-4 min-h-0">
+        {/* Três campos GRANDES ocupando o restante */}
+        <div className="flex-1 min-h-0 grid grid-cols-3 gap-4">
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
             return (
