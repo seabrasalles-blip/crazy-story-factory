@@ -26,7 +26,7 @@ const THEME: Record<CategoryKey, string> = {
   emocoes: "var(--theme-emocoes)",
 };
 
-export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) => {
+export const StoryViewScreen = ({ results, story, title, onTitleChange, onBack, onRestart }: Props) => {
   const handlePrint = () => window.print();
 
   return (
