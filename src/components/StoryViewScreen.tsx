@@ -6,6 +6,8 @@ import bannerVeja from "@/assets/telas/vejahistoria.png";
 type Props = {
   results: Partial<Record<CategoryKey, Item>>;
   story: StoryText;
+  title: string;
+  onTitleChange: (v: string) => void;
   onBack: () => void;
   onRestart: () => void;
 };
@@ -24,7 +26,7 @@ const THEME: Record<CategoryKey, string> = {
   emocoes: "var(--theme-emocoes)",
 };
 
-export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) => {
+export const StoryViewScreen = ({ results, story, title, onTitleChange, onBack, onRestart }: Props) => {
   const handlePrint = () => window.print();
 
   return (
@@ -104,12 +106,35 @@ export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) =>
               "inset 0 0 0 6px hsl(var(--off-white)), inset 0 0 0 8px hsl(var(--contorno) / 0.15), 0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
           }}
         >
-          <h2
-            className="text-center font-display font-extrabold text-2xl mb-3"
-            style={{ color: "hsl(var(--roxo-profundo))" }}
-          >
-            ✦ Minha História ✦
-          </h2>
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <span
+              className="font-display text-2xl select-none"
+              style={{ color: "hsl(var(--rosa))" }}
+              aria-hidden
+            >
+              ✦
+            </span>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => onTitleChange(e.target.value)}
+              placeholder="Digite o título da sua história..."
+              aria-label="Título da história"
+              className="flex-1 max-w-[80%] bg-transparent text-center font-display font-extrabold text-3xl md:text-4xl outline-none border-0 border-b-4 border-dashed pb-1 placeholder:font-display placeholder:font-bold placeholder:text-base placeholder:italic"
+              style={{
+                color: "hsl(var(--roxo-profundo))",
+                borderColor: "hsl(var(--roxo-profundo) / 0.35)",
+                letterSpacing: "0.5px",
+              }}
+            />
+            <span
+              className="font-display text-2xl select-none"
+              style={{ color: "hsl(var(--rosa))" }}
+              aria-hidden
+            >
+              ✦
+            </span>
+          </div>
           <div
             className="text-lg leading-8 whitespace-pre-wrap"
             style={{ fontFamily: "'Fredoka', sans-serif", color: "hsl(var(--contorno))", textIndent: "1.5rem" }}
@@ -134,19 +159,19 @@ export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) =>
       </div>
 
       {/* Área de impressão */}
-      <PrintArea results={results} story={story} />
+      <PrintArea results={results} story={story} title={title} />
     </div>
   );
 };
 
-const PrintArea = ({ results, story }: { results: Props["results"]; story: StoryText }) => {
+const PrintArea = ({ results, story, title }: { results: Props["results"]; story: StoryText; title: string }) => {
   const node = (
     <div className="print-area">
       <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#4B1C8C", marginBottom: 4 }}>
-        Uma Fábrica de Histórias Malucas!
+        {title.trim() || "Minha história"}
       </h1>
       <h2 style={{ color: "#666", marginBottom: 20, fontWeight: 500, fontSize: 18 }}>
-        Minha história fabricada
+        Uma Fábrica de Histórias Malucas
       </h2>
 
       <h3 style={{ color: "#4B1C8C", marginBottom: 10, fontSize: 18 }}>Elementos sorteados</h3>

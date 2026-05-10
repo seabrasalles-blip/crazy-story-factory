@@ -42,6 +42,7 @@ const Index = () => {
   const [screen, setScreen] = useState<ScreenId>("intro");
   const [results, setResults] = useState<Partial<Record<CategoryKey, Item>>>({});
   const [story, setStory] = useState<StoryText>({ inicio: "", meio: "", fim: "" });
+  const [title, setTitle] = useState<string>("");
 
   const goNext = () => {
     const i = FLOW.indexOf(screen);
@@ -58,6 +59,7 @@ const Index = () => {
   const restart = () => {
     setResults({});
     setStory({ inicio: "", meio: "", fim: "" });
+    setTitle("");
     setScreen("intro");
   };
 
@@ -114,6 +116,8 @@ const Index = () => {
         <StoryViewScreen
           results={results}
           story={story}
+          title={title}
+          onTitleChange={setTitle}
           onBack={() => setScreen("historia")}
           onRestart={restart}
         />
