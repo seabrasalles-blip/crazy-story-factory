@@ -112,17 +112,27 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
                 }}
               >
                 <div
-                  className="absolute -top-3 left-4 px-3.5 py-1 font-display font-extrabold text-sm uppercase tracking-wide"
+                  className="absolute -top-3.5 left-4 inline-flex items-center gap-1.5 px-3 py-1 font-display font-extrabold text-xs uppercase tracking-wider"
                   style={{
-                    background: `hsl(${cfg.color})`,
-                    color: "hsl(var(--off-white))",
+                    background: "hsl(var(--off-white))",
+                    color: `hsl(${cfg.color})`,
                     border: "3px solid hsl(var(--contorno))",
                     borderRadius: 999,
                     boxShadow: "0 3px 0 hsl(var(--contorno))",
-                    transform: "rotate(-2deg)",
+                    transform: `rotate(${idx === 1 ? 2 : -2}deg)`,
                   }}
                 >
-                  {cfg.emoji} {cfg.title}
+                  <span
+                    className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[11px]"
+                    style={{
+                      background: `hsl(${cfg.color})`,
+                      color: "hsl(var(--off-white))",
+                      border: "2px solid hsl(var(--contorno))",
+                    }}
+                  >
+                    {idx + 1}
+                  </span>
+                  <span>{cfg.emoji} {cfg.title}</span>
                 </div>
 
                 <textarea
