@@ -59,6 +59,7 @@ const Index = () => {
   const restart = () => {
     setResults({});
     setStory({ inicio: "", meio: "", fim: "" });
+    setTitle("");
     setScreen("intro");
   };
 
