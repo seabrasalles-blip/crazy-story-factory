@@ -1,6 +1,5 @@
-import { createPortal } from "react-dom";
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
-import bannerEscrita from "@/assets/telas/telaescrita.png";
+import bannerEscrita from "@/assets/telas/montehistoria.png";
 
 export type StoryText = { inicio: string; meio: string; fim: string };
 
@@ -10,6 +9,7 @@ type Props = {
   onChange: (s: StoryText) => void;
   onBack: () => void;
   onRestart: () => void;
+  onView: () => void;
 };
 
 const THEME: Record<CategoryKey, string> = {
@@ -21,62 +21,34 @@ const THEME: Record<CategoryKey, string> = {
 };
 
 const FIELD_LABEL: Record<keyof StoryText, { title: string; placeholder: string; color: string; emoji: string }> = {
-  inicio: { title: "Começo", placeholder: "Era uma vez...",                color: "var(--amarelo)", emoji: "✨" },
-  meio:   { title: "Meio",   placeholder: "Então, de repente...",          color: "var(--rosa)",    emoji: "🌀" },
-  fim:    { title: "Final",  placeholder: "E foi assim que tudo terminou...", color: "var(--verde)",   emoji: "🎉" },
+  inicio: { title: "Começo", placeholder: "Era uma vez...",                   color: "var(--rosa)",        emoji: "✨" },
+  meio:   { title: "Meio",   placeholder: "Então, de repente...",              color: "var(--azul-magico)", emoji: "🌀" },
+  fim:    { title: "Final",  placeholder: "E foi assim que tudo terminou...",  color: "var(--roxo-medio)",  emoji: "🎉" },
 };
 
-// Moldura decorativa de tubulação na borda superior
-const PipeFrame = () => (
-  <>
-    <div
-      className="absolute top-0 left-0 right-0 h-3 pointer-events-none"
-      style={{
-        background: "linear-gradient(90deg, hsl(var(--rosa)) 0%, hsl(var(--amarelo)) 50%, hsl(var(--azul-magico)) 100%)",
-        borderBottom: "3px solid hsl(var(--contorno))",
-      }}
-    />
-    <div
-      className="absolute bottom-0 left-0 right-0 h-3 pointer-events-none"
-      style={{
-        background: "linear-gradient(90deg, hsl(var(--azul-magico)) 0%, hsl(var(--amarelo)) 50%, hsl(var(--rosa)) 100%)",
-        borderTop: "3px solid hsl(var(--contorno))",
-      }}
-    />
-  </>
-);
-
-export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Props) => {
-  const handlePrint = () => window.print();
-
+export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onView }: Props) => {
   return (
     <div
       className="w-full h-full flex flex-col animate-fade-in no-print relative overflow-hidden"
       style={{
         backgroundImage: `url(${bannerEscrita})`,
-        backgroundSize: "100% 100%",
-        backgroundPosition: "center top",
+        backgroundSize: "contain",
+        backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
         backgroundColor: "hsl(var(--off-white))",
       }}
       role="img"
       aria-label="Monte sua história! Use os ingredientes que você sorteou"
     >
-      {/* Espaçador do banner ilustrado (empurra conteúdo abaixo da curva roxa) */}
-      <div className="shrink-0" style={{ height: "clamp(240px, 42%, 340px)" }} />
+      {/* Espaçador do header ilustrado (~32% da altura da imagem) */}
+      <div className="shrink-0" style={{ height: "33%" }} />
 
-      <div className="grid grid-cols-12 gap-4 flex-1 min-h-0 px-6 pt-4 pb-3 relative">
+      {/* Conteúdo dentro da área branca */}
+      <div className="flex-1 min-h-0 grid grid-cols-12 gap-5 px-8 pt-4 pb-2">
         {/* Sidebar — ingredientes */}
-        <div
-          className="col-span-4 rounded-3xl p-3 flex flex-col gap-2 overflow-hidden"
-          style={{
-            background: "linear-gradient(180deg, hsl(var(--roxo-profundo)) 0%, hsl(var(--roxo-medio)) 100%)",
-            border: "4px solid hsl(var(--contorno))",
-            boxShadow: "0 6px 0 hsl(var(--contorno)), 0 16px 26px hsl(var(--contorno) / 0.35)",
-          }}
-        >
+        <aside className="col-span-3 flex flex-col gap-2 min-h-0">
           <div
-            className="px-3 py-1.5 rounded-full text-center font-display font-extrabold text-xs uppercase tracking-widest self-center mb-1"
+            className="px-3 py-1 rounded-full text-center font-display font-extrabold text-[11px] uppercase tracking-widest self-center"
             style={{
               background: "hsl(var(--amarelo))",
               color: "hsl(var(--contorno))",
@@ -87,33 +59,33 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
             🎴 Ingredientes
           </div>
 
-          <div className="flex flex-col gap-2 overflow-y-auto pr-1">
+          <div className="flex flex-col gap-1.5 overflow-hidden">
             {CATEGORY_ORDER.map((key, idx) => {
               const item = results[key];
               if (!item) return null;
               return (
                 <div
                   key={key}
-                  className="flex items-center gap-2.5 rounded-2xl p-2 animate-pop"
+                  className="flex items-center gap-2 rounded-xl p-1.5 animate-pop"
                   style={{
                     background: "hsl(var(--off-white))",
-                    border: "3px solid hsl(var(--contorno))",
-                    boxShadow: "0 3px 0 hsl(var(--contorno))",
-                    transform: `rotate(${idx % 2 === 0 ? -1.5 : 1.5}deg)`,
+                    border: "2.5px solid hsl(var(--contorno))",
+                    boxShadow: "0 2px 0 hsl(var(--contorno))",
+                    transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
                   }}
                 >
                   <div
-                    className="rounded-xl p-1 shrink-0"
+                    className="rounded-lg p-0.5 shrink-0"
                     style={{
                       background: `hsl(${THEME[key]} / 0.25)`,
                       border: "2px solid hsl(var(--contorno))",
                     }}
                   >
-                    <img src={item.image} alt={item.label} className="w-12 h-12 object-contain" />
+                    <img src={item.image} alt={item.label} className="w-9 h-9 object-contain" />
                   </div>
-                  <div className="leading-tight">
+                  <div className="leading-tight min-w-0">
                     <div
-                      className="inline-block px-2 py-0.5 rounded-full font-display font-extrabold text-[10px] uppercase tracking-wide mb-0.5"
+                      className="inline-block px-1.5 py-0 rounded-full font-display font-extrabold text-[9px] uppercase tracking-wide"
                       style={{
                         background: `hsl(${THEME[key]})`,
                         color: "hsl(var(--contorno))",
@@ -122,7 +94,7 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
                     >
                       {CATEGORIES[key].title}
                     </div>
-                    <div className="font-display font-extrabold text-sm" style={{ color: "hsl(var(--contorno))" }}>
+                    <div className="font-display font-extrabold text-xs truncate" style={{ color: "hsl(var(--contorno))" }}>
                       {item.label}
                     </div>
                   </div>
@@ -130,32 +102,30 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
               );
             })}
           </div>
-        </div>
+        </aside>
 
-        {/* Centro — três cartões "página de caderno" */}
-        <div className="col-span-8 flex flex-col gap-4">
+        {/* Centro — três campos confortáveis */}
+        <div className="col-span-9 grid grid-cols-3 gap-4 min-h-0">
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
             return (
               <div
                 key={k}
-                className="relative rounded-2xl p-3 pt-5 flex-1 flex flex-col"
+                className="relative rounded-2xl p-4 pt-7 flex flex-col min-h-0"
                 style={{
                   background: "hsl(var(--off-white))",
                   backgroundImage:
-                    "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 26px)",
+                    "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 28px)",
                   border: "4px solid hsl(var(--contorno))",
-                  borderRadius: 22,
                   boxShadow: "0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
                   transform: `rotate(${idx === 1 ? 0.4 : -0.3}deg)`,
                 }}
               >
-                {/* Etiqueta sticker flutuante */}
                 <div
-                  className="absolute -top-3.5 left-5 px-4 py-1 font-display font-extrabold text-sm uppercase tracking-wide"
+                  className="absolute -top-3.5 left-4 px-4 py-1 font-display font-extrabold text-sm uppercase tracking-wide"
                   style={{
                     background: `hsl(${cfg.color})`,
-                    color: "hsl(var(--contorno))",
+                    color: "hsl(var(--off-white))",
                     border: "3px solid hsl(var(--contorno))",
                     borderRadius: 999,
                     boxShadow: "0 3px 0 hsl(var(--contorno))",
@@ -182,87 +152,11 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart }: Pro
       </div>
 
       {/* Painel inferior */}
-      <div className="bg-painel flex justify-between items-center px-5 py-3 relative">
+      <div className="bg-painel flex justify-between items-center px-5 py-2.5 relative shrink-0">
         <button onClick={onBack} className="btn-purple text-base px-5 py-2">← Voltar</button>
         <button onClick={onRestart} className="btn-yellow text-base px-5 py-2">↺ Reiniciar</button>
-        <button onClick={handlePrint} className="btn-magenta text-base px-5 py-2">🖨 Imprimir história</button>
+        <button onClick={onView} className="btn-magenta text-base px-5 py-2">📖 Ver história</button>
       </div>
-
-      {/* Área de impressão (oculta na tela, renderizada no body via portal) */}
-      <PrintArea results={results} story={story} />
     </div>
   );
-};
-
-const PrintArea = ({ results, story }: { results: Props["results"]; story: StoryText }) => {
-  const node = (
-    <div className="print-area">
-      <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#4B1C8C", marginBottom: 4 }}>
-        Uma Fábrica de Histórias Malucas!
-      </h1>
-      <h2 style={{ color: "#666", marginBottom: 20, fontWeight: 500, fontSize: 18 }}>
-        Minha história fabricada
-      </h2>
-
-      <h3 style={{ color: "#4B1C8C", marginBottom: 10, fontSize: 18 }}>Elementos sorteados</h3>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: 12,
-          marginBottom: 24,
-        }}
-      >
-        {CATEGORY_ORDER.map((k) => {
-          const it = results[k];
-          if (!it) return null;
-          return (
-            <div
-              key={k}
-              style={{
-                border: "2px solid #1D2540",
-                borderRadius: 12,
-                padding: 8,
-                textAlign: "center",
-              }}
-            >
-              <img
-                src={it.image}
-                alt={it.label}
-                style={{ width: 70, height: 70, objectFit: "contain", margin: "0 auto" }}
-              />
-              <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>
-                {CATEGORIES[k].title}
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#1D2540" }}>
-                {it.label}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {(["inicio", "meio", "fim"] as const).map((k) => (
-        <div key={k} style={{ marginBottom: 16, pageBreakInside: "avoid" }}>
-          <h3 style={{ color: "#4B1C8C", marginBottom: 6, fontSize: 18 }}>
-            {FIELD_LABEL[k].title}
-          </h3>
-          <p
-            style={{
-              whiteSpace: "pre-wrap",
-              lineHeight: 1.6,
-              fontSize: 14,
-              color: "#222",
-              borderBottom: "1px solid #eee",
-              paddingBottom: 8,
-              minHeight: 40,
-            }}
-          >
-            {story[k] || "—"}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-  return createPortal(node, document.body);
 };
