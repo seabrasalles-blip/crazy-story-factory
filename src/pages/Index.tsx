@@ -116,6 +116,8 @@ const Index = () => {
         <StoryViewScreen
           results={results}
           story={story}
+          title={title}
+          onTitleChange={setTitle}
           onBack={() => setScreen("historia")}
           onRestart={restart}
         />
