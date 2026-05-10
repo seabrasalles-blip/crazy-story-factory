@@ -42,6 +42,7 @@ const Index = () => {
   const [screen, setScreen] = useState<ScreenId>("intro");
   const [results, setResults] = useState<Partial<Record<CategoryKey, Item>>>({});
   const [story, setStory] = useState<StoryText>({ inicio: "", meio: "", fim: "" });
+  const [title, setTitle] = useState<string>("");
 
   const goNext = () => {
     const i = FLOW.indexOf(screen);
