@@ -41,93 +41,87 @@ export const StoryViewScreen = ({ results, story, onBack, onRestart }: Props) =>
       aria-label="Veja sua história"
     >
       {/* Espaçador do header ilustrado */}
-      <div className="shrink-0" style={{ height: "33%" }} />
+      <div className="shrink-0" style={{ height: "30%" }} />
 
-      {/* Conteúdo: ingredientes + história */}
-      <div className="flex-1 min-h-0 px-10 pt-4 pb-2 flex flex-col gap-3">
-        {/* Faixa de ingredientes */}
-        <div className="flex items-center gap-2 shrink-0">
+      {/* Conteúdo: sidebar de ingredientes + página de livro */}
+      <div className="flex-1 min-h-0 px-8 pt-2 pb-2 flex gap-4">
+        {/* Sidebar de ingredientes */}
+        <aside
+          className="shrink-0 flex flex-col gap-2 rounded-2xl p-2.5"
+          style={{
+            width: 130,
+            background: "hsl(var(--off-white) / 0.92)",
+            border: "3px solid hsl(var(--contorno))",
+            boxShadow: "0 4px 0 hsl(var(--contorno))",
+          }}
+        >
           <div
-            className="px-3 py-1 rounded-full font-display font-extrabold text-[11px] uppercase tracking-widest"
+            className="text-center font-display font-extrabold text-[10px] uppercase tracking-widest py-1 rounded-md"
             style={{
               background: "hsl(var(--amarelo))",
               color: "hsl(var(--contorno))",
-              border: "2.5px solid hsl(var(--contorno))",
-              boxShadow: "0 3px 0 hsl(var(--contorno))",
+              border: "2px solid hsl(var(--contorno))",
             }}
           >
             🎴 Ingredientes
           </div>
-          <div className="flex gap-2 flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col gap-1.5 overflow-y-auto">
             {CATEGORY_ORDER.map((key, idx) => {
               const item = results[key];
               if (!item) return null;
               return (
                 <div
                   key={key}
-                  className="flex items-center gap-1.5 rounded-xl p-1 pr-2"
+                  className="flex flex-col items-center gap-0.5 rounded-lg p-1"
                   style={{
-                    background: "hsl(var(--off-white))",
-                    border: "2.5px solid hsl(var(--contorno))",
-                    boxShadow: "0 2px 0 hsl(var(--contorno))",
-                    transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
+                    background: `hsl(${THEME[key]} / 0.18)`,
+                    border: "2px solid hsl(var(--contorno))",
+                    transform: `rotate(${idx % 2 === 0 ? -1.5 : 1.5}deg)`,
                   }}
                 >
+                  <img src={item.image} alt={item.label} className="w-10 h-10 object-contain" />
                   <div
-                    className="rounded-md p-0.5 shrink-0"
-                    style={{
-                      background: `hsl(${THEME[key]} / 0.25)`,
-                      border: "1.5px solid hsl(var(--contorno))",
-                    }}
+                    className="font-display font-extrabold text-[10px] leading-tight text-center truncate w-full"
+                    style={{ color: "hsl(var(--contorno))" }}
                   >
-                    <img src={item.image} alt={item.label} className="w-7 h-7 object-contain" />
-                  </div>
-                  <div className="font-display font-extrabold text-xs leading-tight" style={{ color: "hsl(var(--contorno))" }}>
                     {item.label}
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
+        </aside>
 
-        {/* Cartão da história — grande, tipo livro */}
+        {/* Página de livro — texto contínuo */}
         <div
-          className="flex-1 min-h-0 rounded-2xl px-8 py-6 overflow-y-auto"
+          className="flex-1 min-w-0 rounded-2xl px-10 py-6 overflow-y-auto relative"
           style={{
             background: "hsl(var(--off-white))",
             backgroundImage:
-              "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .06) 0 1px, transparent 1px 32px)",
+              "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .05) 0 1px, transparent 1px 34px)",
             border: "4px solid hsl(var(--contorno))",
-            boxShadow: "0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
+            boxShadow:
+              "inset 0 0 0 6px hsl(var(--off-white)), inset 0 0 0 8px hsl(var(--contorno) / 0.15), 0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
           }}
         >
-          <div className="flex flex-col gap-4" style={{ fontFamily: "'Fredoka', sans-serif", color: "hsl(var(--contorno))" }}>
-            {(Object.keys(FIELD_TITLE) as (keyof StoryText)[]).map((k) => {
-              const cfg = FIELD_TITLE[k];
-              const text = story[k]?.trim();
-              return (
-                <section key={k}>
-                  <div
-                    className="inline-block px-3 py-0.5 mb-2 rounded-full font-display font-extrabold text-xs uppercase tracking-wide"
-                    style={{
-                      background: `hsl(${cfg.color})`,
-                      color: "hsl(var(--off-white))",
-                      border: "2.5px solid hsl(var(--contorno))",
-                      boxShadow: "0 2px 0 hsl(var(--contorno))",
-                    }}
-                  >
-                    {cfg.emoji} {cfg.title}
-                  </div>
-                  <p
-                    className="text-lg leading-8 whitespace-pre-wrap"
-                    style={{ color: text ? "hsl(var(--contorno))" : "hsl(var(--contorno) / 0.4)" }}
-                  >
-                    {text || "(em branco)"}
-                  </p>
-                </section>
-              );
-            })}
+          <h2
+            className="text-center font-display font-extrabold text-2xl mb-3"
+            style={{ color: "hsl(var(--roxo-profundo))" }}
+          >
+            ✦ Minha História ✦
+          </h2>
+          <div
+            className="text-lg leading-8 whitespace-pre-wrap"
+            style={{ fontFamily: "'Fredoka', sans-serif", color: "hsl(var(--contorno))", textIndent: "1.5rem" }}
+          >
+            {(["inicio", "meio", "fim"] as const)
+              .map((k) => story[k]?.trim())
+              .filter(Boolean)
+              .join("\n\n") || (
+              <span style={{ color: "hsl(var(--contorno) / 0.4)", fontStyle: "italic" }}>
+                Sua história ainda está em branco. Volte para escrevê-la!
+              </span>
+            )}
           </div>
         </div>
       </div>
