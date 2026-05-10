@@ -21,9 +21,9 @@ const THEME: Record<CategoryKey, string> = {
 };
 
 const FIELD_LABEL: Record<keyof StoryText, { title: string; placeholder: string; color: string; emoji: string }> = {
-  inicio: { title: "Começo", placeholder: "Era uma vez...",                   color: "var(--rosa)",        emoji: "✨" },
-  meio:   { title: "Meio",   placeholder: "Então, de repente...",              color: "var(--azul-magico)", emoji: "🌀" },
-  fim:    { title: "Final",  placeholder: "E foi assim que tudo terminou...",  color: "var(--roxo-medio)",  emoji: "🎉" },
+  inicio: { title: "Começo", placeholder: "Era uma vez...",                  color: "var(--rosa)",        emoji: "✨" },
+  meio:   { title: "Meio",   placeholder: "Então, de repente...",             color: "var(--azul-magico)", emoji: "🌀" },
+  fim:    { title: "Final",  placeholder: "E foi assim que tudo terminou...", color: "var(--roxo-medio)",  emoji: "🎉" },
 };
 
 export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onView }: Props) => {
@@ -40,77 +40,79 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
       role="img"
       aria-label="Monte sua história! Use os ingredientes que você sorteou"
     >
-      {/* Espaçador do header ilustrado (~32% da altura da imagem) */}
-      <div className="shrink-0" style={{ height: "33%" }} />
+      {/* Espaçador do header ilustrado */}
+      <div className="shrink-0" style={{ height: "30%" }} />
 
-      {/* Conteúdo dentro da área branca */}
-      <div className="flex-1 min-h-0 flex flex-col gap-3 px-6 pt-3 pb-2">
-        {/* Faixa horizontal de ingredientes (compacta) */}
-        <div className="flex items-center gap-2 shrink-0">
+      {/* Conteúdo: sidebar de ingredientes + coluna de escrita */}
+      <div className="flex-1 min-h-0 flex gap-4 px-6 pt-2 pb-2">
+        {/* Sidebar estreita de ingredientes */}
+        <aside
+          className="shrink-0 flex flex-col gap-2 rounded-2xl p-2.5"
+          style={{
+            width: 130,
+            background: "hsl(var(--off-white) / 0.92)",
+            border: "3px solid hsl(var(--contorno))",
+            boxShadow: "0 4px 0 hsl(var(--contorno))",
+          }}
+        >
           <div
-            className="px-2.5 py-1 rounded-full font-display font-extrabold text-[10px] uppercase tracking-widest shrink-0"
+            className="text-center font-display font-extrabold text-[10px] uppercase tracking-widest py-1 rounded-md"
             style={{
               background: "hsl(var(--amarelo))",
               color: "hsl(var(--contorno))",
               border: "2px solid hsl(var(--contorno))",
-              boxShadow: "0 2px 0 hsl(var(--contorno))",
             }}
           >
             🎴 Ingredientes
           </div>
-          <div className="flex gap-1.5 flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col gap-1.5 overflow-y-auto">
             {CATEGORY_ORDER.map((key, idx) => {
               const item = results[key];
               if (!item) return null;
               return (
                 <div
                   key={key}
-                  className="flex items-center gap-1.5 rounded-lg px-1.5 py-0.5 animate-pop min-w-0 flex-1"
+                  className="flex flex-col items-center gap-0.5 rounded-lg p-1 animate-pop"
                   style={{
-                    background: "hsl(var(--off-white))",
+                    background: `hsl(${THEME[key]} / 0.18)`,
                     border: "2px solid hsl(var(--contorno))",
-                    boxShadow: "0 2px 0 hsl(var(--contorno))",
-                    transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
+                    transform: `rotate(${idx % 2 === 0 ? -1.5 : 1.5}deg)`,
                   }}
                   title={`${CATEGORIES[key].title}: ${item.label}`}
                 >
+                  <img src={item.image} alt={item.label} className="w-10 h-10 object-contain" />
                   <div
-                    className="rounded-md p-0.5 shrink-0"
-                    style={{
-                      background: `hsl(${THEME[key]} / 0.25)`,
-                      border: "1.5px solid hsl(var(--contorno))",
-                    }}
+                    className="font-display font-extrabold text-[10px] leading-tight text-center truncate w-full"
+                    style={{ color: "hsl(var(--contorno))" }}
                   >
-                    <img src={item.image} alt={item.label} className="w-7 h-7 object-contain" />
-                  </div>
-                  <div className="font-display font-extrabold text-[11px] truncate min-w-0" style={{ color: "hsl(var(--contorno))" }}>
                     {item.label}
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
+        </aside>
 
-        {/* Três campos GRANDES ocupando o restante */}
-        <div className="flex-1 min-h-0 grid grid-cols-3 gap-4">
+        {/* Coluna de escrita VERTICAL: três blocos empilhados */}
+        <div className="flex-1 min-w-0 flex flex-col gap-2.5 overflow-y-auto pr-1">
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
             return (
               <div
                 key={k}
-                className="relative rounded-2xl p-4 pt-7 flex flex-col min-h-0"
+                className="relative rounded-2xl px-5 pt-5 pb-3 flex flex-col"
                 style={{
                   background: "hsl(var(--off-white))",
                   backgroundImage:
-                    "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 28px)",
+                    "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 30px)",
                   border: "4px solid hsl(var(--contorno))",
-                  boxShadow: "0 6px 0 hsl(var(--contorno)), 0 14px 22px hsl(var(--contorno) / 0.25)",
-                  transform: `rotate(${idx === 1 ? 0.4 : -0.3}deg)`,
+                  boxShadow: "0 5px 0 hsl(var(--contorno)), 0 12px 20px hsl(var(--contorno) / 0.18)",
+                  transform: `rotate(${idx === 1 ? 0.3 : -0.25}deg)`,
+                  minHeight: 110,
                 }}
               >
                 <div
-                  className="absolute -top-3.5 left-4 px-4 py-1 font-display font-extrabold text-sm uppercase tracking-wide"
+                  className="absolute -top-3 left-4 px-3.5 py-1 font-display font-extrabold text-sm uppercase tracking-wide"
                   style={{
                     background: `hsl(${cfg.color})`,
                     color: "hsl(var(--off-white))",
@@ -127,10 +129,12 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
                   value={story[k]}
                   onChange={(e) => onChange({ ...story, [k]: e.target.value })}
                   placeholder={cfg.placeholder}
-                  className="w-full flex-1 resize-none bg-transparent outline-none text-base font-medium leading-7"
+                  rows={3}
+                  className="w-full resize-none bg-transparent outline-none text-base font-medium leading-7 mt-1"
                   style={{
                     color: "hsl(var(--contorno))",
                     fontFamily: "'Fredoka', sans-serif",
+                    minHeight: 80,
                   }}
                 />
               </div>
