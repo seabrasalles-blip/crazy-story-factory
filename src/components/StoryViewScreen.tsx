@@ -6,6 +6,8 @@ import bannerVeja from "@/assets/telas/vejahistoria.png";
 type Props = {
   results: Partial<Record<CategoryKey, Item>>;
   story: StoryText;
+  title: string;
+  onTitleChange: (v: string) => void;
   onBack: () => void;
   onRestart: () => void;
 };
