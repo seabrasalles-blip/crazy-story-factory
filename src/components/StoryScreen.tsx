@@ -41,7 +41,7 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
       aria-label="Monte sua história! Use os ingredientes que você sorteou"
     >
       {/* Espaçador do header ilustrado */}
-      <div className="shrink-0" style={{ height: "30%" }} />
+      <div className="shrink-0" style={{ height: "22%" }} />
 
       {/* Conteúdo: sidebar de ingredientes + coluna de escrita */}
       <div className="flex-1 min-h-0 flex gap-4 px-6 pt-2 pb-2">
