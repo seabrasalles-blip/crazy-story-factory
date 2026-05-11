@@ -46,50 +46,37 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
       {/* Conteúdo: sidebar de ingredientes + coluna de escrita */}
       <div className="flex-1 min-h-0 flex gap-4 px-6 pt-2 pb-2">
         {/* Sidebar estreita de ingredientes */}
-        <aside
-          className="shrink-0 flex flex-col gap-2 rounded-2xl p-2.5"
-          style={{
-            width: 130,
-            background: "hsl(var(--off-white) / 0.92)",
-            border: "3px solid hsl(var(--contorno))",
-            boxShadow: "0 4px 0 hsl(var(--contorno))",
-          }}
+   <aside className="ingredients-panel relative z-10">
+
+  <div className="ingredients-title">
+    ✨ Ingredientes
+  </div>
+
+  <div className="flex flex-col items-center gap-4">
+    {CATEGORY_ORDER.map((key) => {
+      const item = results[key];
+      if (!item) return null;
+
+      return (
+        <div
+          key={key}
+          className="ingredient-card animate-pop"
+          title={`${CATEGORIES[key].title}: ${item.label}`}
         >
-          <div
-            className="text-center font-display font-extrabold text-[10px] uppercase tracking-widest py-1 rounded-md"
-            style={{
-              background: "hsl(var(--amarelo))",
-              color: "hsl(var(--contorno))",
-              border: "2px solid hsl(var(--contorno))",
-            }}
-          >
- <div className="ingredients-title">
-  ✨ Ingredientes
-</div>
+          <img
+            src={item.image}
+            alt={item.label}
+          />
 
-<div className="flex-1 min-h-0 flex flex-col items-center gap-4 pt-2">
-  {CATEGORY_ORDER.map((key) => {
-    const item = results[key];
-    if (!item) return null;
+          <span>
+            {item.label}
+          </span>
+        </div>
+      );
+    })}
+  </div>
 
-    return (
-      <div
-        key={key}
-        className="ingredient-card animate-pop"
-        title={`${CATEGORIES[key].title}: ${item.label}`}
-      >
-        <img
-          src={item.image}
-          alt={item.label}
-        />
-
-        <span>
-          {item.label}
-        </span>
-      </div>
-    );
-  })}
-</div>
+</aside>
 
         {/* Coluna de escrita VERTICAL: três blocos empilhados */}
        <div className="flex-1 min-w-0 flex flex-col gap-4 pr-1 pt-2">
