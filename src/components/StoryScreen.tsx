@@ -94,58 +94,22 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
         </aside>
 
         {/* Coluna de escrita VERTICAL: três blocos empilhados */}
-        <div className="flex-1 min-w-0 flex flex-col gap-2.5 overflow-y-auto pr-1">
+        <div className="flex-1 min-w-0 flex flex-col gap-5 overflow-y-auto pr-1 pt-3">
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
+            const tagClass = idx === 0 ? "" : idx === 1 ? "story-tag-middle" : "story-tag-final";
             return (
-              <div key={k} className="flex-1 min-h-0 flex flex-col">
-                {/* Plaquinha cabeçalho */}
-                <div
-                  className="self-start inline-flex items-center gap-2 px-4 py-1.5 mb-1.5 font-display font-extrabold text-sm uppercase tracking-wider"
-                  style={{
-                    background: "hsl(var(--off-white))",
-                    color: `hsl(${cfg.color})`,
-                    border: "3px solid hsl(var(--contorno))",
-                    borderRadius: 999,
-                    boxShadow: "0 3px 0 hsl(var(--contorno))",
-                    transform: `rotate(${idx === 1 ? 1.5 : -1.5}deg)`,
-                  }}
-                >
-                  <span
-                    className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs"
-                    style={{
-                      background: `hsl(${cfg.color})`,
-                      color: "hsl(var(--off-white))",
-                      border: "2px solid hsl(var(--contorno))",
-                    }}
-                  >
-                    {idx + 1}
-                  </span>
-                  <span>{cfg.emoji} {cfg.title}</span>
+              <div key={k} className="story-block flex-1 min-h-0 flex flex-col">
+                <div className={`story-tag ${tagClass}`}>
+                  <span className="story-tag-icon">{cfg.emoji}</span>
+                  <span>{cfg.title}</span>
                 </div>
-
-                {/* Campo de escrita grande */}
-                <div
-                  className="flex-1 min-h-0 rounded-2xl p-3"
-                  style={{
-                    background: "hsl(var(--off-white))",
-                    backgroundImage:
-                      "repeating-linear-gradient(0deg, hsl(var(--roxo-profundo) / .08) 0 1px, transparent 1px 32px)",
-                    border: "4px solid hsl(var(--contorno))",
-                    boxShadow: "0 5px 0 hsl(var(--contorno)), 0 12px 20px hsl(var(--contorno) / 0.18)",
-                  }}
-                >
-                  <textarea
-                    value={story[k]}
-                    onChange={(e) => onChange({ ...story, [k]: e.target.value })}
-                    placeholder={cfg.placeholder}
-                    className="w-full h-full resize-none bg-transparent outline-none text-base font-medium leading-8"
-                    style={{
-                      color: "hsl(var(--contorno))",
-                      fontFamily: "'Fredoka', sans-serif",
-                    }}
-                  />
-                </div>
+                <textarea
+                  value={story[k]}
+                  onChange={(e) => onChange({ ...story, [k]: e.target.value })}
+                  placeholder={cfg.placeholder}
+                  className="story-writing-box flex-1"
+                />
               </div>
             );
           })}
