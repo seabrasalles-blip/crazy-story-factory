@@ -154,8 +154,8 @@ export const StoryViewScreen = ({ results, story, title, onTitleChange, onBack, 
       {/* Painel inferior */}
       <div className="bg-painel flex justify-between items-center px-5 py-2.5 relative shrink-0">
         <button onClick={onBack} className="btn-purple text-base px-5 py-2">← Voltar para editar</button>
-        <button onClick={onRestart} className="btn-yellow text-base px-5 py-2">↺ Reiniciar</button>
-        <button onClick={handlePrint} className="btn-magenta text-base px-5 py-2">🖨 Imprimir história</button>
+        <button onClick={onRestart} className="btn-purple text-base px-5 py-2">↺ Reiniciar</button>
+        <button onClick={handlePrint} className="btn-purple text-base px-5 py-2">🖨 Imprimir história</button>
       </div>
 
       {/* Área de impressão */}

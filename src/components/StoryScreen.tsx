@@ -155,8 +155,8 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
       {/* Painel inferior */}
       <div className="bg-painel flex justify-between items-center px-5 py-2.5 relative shrink-0">
         <button onClick={onBack} className="btn-purple text-base px-5 py-2">← Voltar</button>
-        <button onClick={onRestart} className="btn-yellow text-base px-5 py-2">↺ Reiniciar</button>
-        <button onClick={onView} className="btn-magenta text-base px-5 py-2">📖 Ver história</button>
+        <button onClick={onRestart} className="btn-purple text-base px-5 py-2">↺ Reiniciar</button>
+        <button onClick={onView} className="btn-purple text-base px-5 py-2">📖 Ver história</button>
       </div>
     </div>
   );
