@@ -63,35 +63,33 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
               border: "2px solid hsl(var(--contorno))",
             }}
           >
-            🎴 Ingredientes
-          </div>
-          <div className="flex-1 min-h-0 flex flex-col gap-1.5 overflow-y-auto">
-            {CATEGORY_ORDER.map((key, idx) => {
-              const item = results[key];
-              if (!item) return null;
-              return (
-                <div
-                  key={key}
-                  className="flex flex-col items-center gap-0.5 rounded-lg p-1 animate-pop"
-                  style={{
-                    background: `hsl(${THEME[key]} / 0.18)`,
-                    border: "2px solid hsl(var(--contorno))",
-                    transform: `rotate(${idx % 2 === 0 ? -1.5 : 1.5}deg)`,
-                  }}
-                  title={`${CATEGORIES[key].title}: ${item.label}`}
-                >
-                  <img src={item.image} alt={item.label} className="w-10 h-10 object-contain" />
-                  <div
-                    className="font-display font-extrabold text-[10px] leading-tight text-center truncate w-full"
-                    style={{ color: "hsl(var(--contorno))" }}
-                  >
-                    {item.label}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </aside>
+ <div className="ingredients-title">
+  ✨ Ingredientes
+</div>
+
+<div className="flex-1 min-h-0 flex flex-col items-center gap-4 pt-2">
+  {CATEGORY_ORDER.map((key) => {
+    const item = results[key];
+    if (!item) return null;
+
+    return (
+      <div
+        key={key}
+        className="ingredient-card animate-pop"
+        title={`${CATEGORIES[key].title}: ${item.label}`}
+      >
+        <img
+          src={item.image}
+          alt={item.label}
+        />
+
+        <span>
+          {item.label}
+        </span>
+      </div>
+    );
+  })}
+</div>
 
         {/* Coluna de escrita VERTICAL: três blocos empilhados */}
        <div className="flex-1 min-w-0 flex flex-col gap-4 pr-1 pt-2">
