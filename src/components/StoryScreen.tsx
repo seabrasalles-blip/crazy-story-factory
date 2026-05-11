@@ -94,7 +94,7 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
         </aside>
 
         {/* Coluna de escrita VERTICAL: três blocos empilhados */}
-        <div className="flex-1 min-w-0 flex flex-col gap-5 overflow-y-auto pr-1 pt-3">
+       <div className="flex-1 min-w-0 flex flex-col gap-4 pr-1 pt-2">
           {(Object.keys(FIELD_LABEL) as (keyof StoryText)[]).map((k, idx) => {
             const cfg = FIELD_LABEL[k];
             const tagClass = idx === 0 ? "" : idx === 1 ? "story-tag-middle" : "story-tag-final";
