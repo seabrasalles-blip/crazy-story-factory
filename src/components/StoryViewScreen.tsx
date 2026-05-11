@@ -46,44 +46,53 @@ export const StoryViewScreen = ({ results, story, title, onTitleChange, onBack, 
       <div className="shrink-0" style={{ height: "30%" }} />
 
       {/* Conteúdo: sidebar de ingredientes + página de livro */}
-      <div className="flex-1 min-h-0 px-8 pt-2 pb-2 flex gap-4">
-        {/* Sidebar de ingredientes */}
+      <div className="flex-1 min-h-0 px-6 pt-3 pb-2 flex gap-5">
+        {/* Sidebar de ingredientes - painel lateral infantil */}
         <aside
-          className="shrink-0 flex flex-col gap-2 rounded-2xl p-2.5"
+          className="shrink-0 flex flex-col gap-3 rounded-3xl p-4 relative"
           style={{
-            width: 130,
-            background: "hsl(var(--off-white) / 0.92)",
-            border: "3px solid hsl(var(--contorno))",
-            boxShadow: "0 4px 0 hsl(var(--contorno))",
+            width: 210,
+            background: "hsl(var(--off-white) / 0.96)",
+            border: "4px solid hsl(var(--contorno))",
+            boxShadow: "0 6px 0 hsl(var(--contorno)), 0 12px 22px hsl(var(--contorno) / 0.18)",
           }}
         >
+          {/* Plaquinha INGREDIENTES */}
           <div
-            className="text-center font-display font-extrabold text-[10px] uppercase tracking-widest py-1 rounded-md"
+            className="-mt-7 mx-auto px-4 py-1.5 font-display font-extrabold text-sm uppercase tracking-wider rounded-2xl flex items-center gap-1.5"
             style={{
               background: "hsl(var(--amarelo))",
               color: "hsl(var(--contorno))",
-              border: "2px solid hsl(var(--contorno))",
+              border: "3px solid hsl(var(--contorno))",
+              boxShadow: "0 4px 0 hsl(var(--contorno))",
+              letterSpacing: "1.5px",
             }}
           >
-            🎴 Ingredientes
+            <span>🧺</span>
+            <span>INGREDIENTES</span>
           </div>
-          <div className="flex-1 min-h-0 flex flex-col gap-1.5 overflow-y-auto">
-            {CATEGORY_ORDER.map((key, idx) => {
+
+          <div className="flex-1 min-h-0 flex flex-col gap-2 overflow-y-auto pr-1">
+            {CATEGORY_ORDER.map((key) => {
               const item = results[key];
               if (!item) return null;
               return (
                 <div
                   key={key}
-                  className="flex flex-col items-center gap-0.5 rounded-lg p-1"
+                  className="flex items-center gap-2.5 rounded-xl p-1.5"
                   style={{
-                    background: `hsl(${THEME[key]} / 0.18)`,
-                    border: "2px solid hsl(var(--contorno))",
-                    transform: `rotate(${idx % 2 === 0 ? -1.5 : 1.5}deg)`,
+                    background: `hsl(${THEME[key]} / 0.16)`,
+                    border: "2px solid hsl(var(--contorno) / 0.7)",
                   }}
                 >
-                  <img src={item.image} alt={item.label} className="w-10 h-10 object-contain" />
+                  <img
+                    src={item.image}
+                    alt={item.label}
+                    className="object-contain shrink-0"
+                    style={{ width: 56, height: 56 }}
+                  />
                   <div
-                    className="font-display font-extrabold text-[10px] leading-tight text-center truncate w-full"
+                    className="font-display font-extrabold text-sm leading-tight"
                     style={{ color: "hsl(var(--contorno))" }}
                   >
                     {item.label}
