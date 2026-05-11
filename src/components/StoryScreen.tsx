@@ -49,7 +49,7 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
    <aside className="ingredients-panel relative z-10">
 
   <div className="ingredients-title">
-    ✨ Ingredientes
+  Ingredientes
   </div>
 
   <div className="flex flex-col items-center gap-4">
