@@ -167,7 +167,7 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
             disabled={spinning}
             className="btn-game bg-[#FF8A00] text-white px-5 py-2"
           >
-            {spinning ? "✨ Girando..." : "🎯 Girar"}
+            {spinning ? "Girando..." : "Girar"}
           </button>
         )}
 
@@ -177,7 +177,7 @@ export const WheelCard = ({ category, result, onResult }: Props) => {
             disabled={spinning}
             className="mt-3 text-sm font-bold underline text-[#5B22A8]"
           >
-            sortear de novo
+           Novo sorteio
           </button>
         )}
       </div>
