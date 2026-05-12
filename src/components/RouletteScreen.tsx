@@ -68,7 +68,7 @@ style={{
               : "bg-[#E5E7EB] !text-[#1D2540] opacity-90"
           }`}
         >
-          ✏️ Escrever história →
+          Escrever história! →
         </button>
       </div>
     </div>
