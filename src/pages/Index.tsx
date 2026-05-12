@@ -88,7 +88,7 @@ const Index = () => {
           alt="Roleta das Emoções"
           onNext={goNext}
           onBack={goBack}
-          nextLabel="Ir para as roletas"
+          nextLabel="Sortear!"
         />
       )}
 
