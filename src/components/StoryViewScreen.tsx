@@ -176,12 +176,12 @@ export const StoryViewScreen = ({ results, story, title, onTitleChange, onBack, 
 const PrintArea = ({ results, story, title }: { results: Props["results"]; story: StoryText; title: string }) => {
   const node = (
     <div className="print-area">
-      <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#4B1C8C", marginBottom: 4 }}>
-        {title.trim() || "Minha história"}
-      </h1>
-      <h2 style={{ color: "#666", marginBottom: 20, fontWeight: 500, fontSize: 18 }}>
+      <h2 style={{ color: "#666", marginBottom: 4, fontWeight: 500, fontSize: 18 }}>
         Uma Fábrica de Histórias Malucas
       </h2>
+      <h1 style={{ fontFamily: '"Baloo 2", cursive', fontSize: 32, color: "#4B1C8C", marginBottom: 20 }}>
+        {title.trim() || "Minha história"}
+      </h1>
 
       <h3 style={{ color: "#4B1C8C", marginBottom: 10, fontSize: 18 }}>Elementos sorteados</h3>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 24 }}>
