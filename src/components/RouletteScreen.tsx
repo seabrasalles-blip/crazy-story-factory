@@ -56,7 +56,7 @@ style={{
         </button>
 
         <div className="hud-counter text-sm">
-          {count} / 5 ingredientes coletados
+          {count} / 5 ingredientes
         </div>
 
         <button
