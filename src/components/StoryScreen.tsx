@@ -54,27 +54,32 @@ export const StoryScreen = ({ results, story, onChange, onBack, onRestart, onVie
   </div>
 
   <div className="flex flex-col items-center gap-4">
+    <TooltipProvider delayDuration={150}>
     {CATEGORY_ORDER.map((key) => {
       const item = results[key];
       if (!item) return null;
 
       return (
-        <div
-          key={key}
-          className="ingredient-card animate-pop"
-          title={`${CATEGORIES[key].title}: ${item.label}`}
-        >
-          <img
-            src={item.image}
-            alt={item.label}
-          />
-
-          <span>
-            {item.label}
-          </span>
-        </div>
+        <Tooltip key={key}>
+          <TooltipTrigger asChild>
+            <div className="ingredient-card animate-pop relative cursor-help">
+              <span className="ingredient-info" aria-hidden="true">i</span>
+              <img src={item.image} alt={item.label} />
+              <span>{item.label}</span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="right" sideOffset={10} className="ingredient-tooltip">
+            <div className="ingredient-tooltip-title">
+              {CATEGORIES[key].title}: {item.label}
+            </div>
+            {item.description && (
+              <div className="ingredient-tooltip-desc">{item.description}</div>
+            )}
+          </TooltipContent>
+        </Tooltip>
       );
     })}
+    </TooltipProvider>
   </div>
 
 </aside>
