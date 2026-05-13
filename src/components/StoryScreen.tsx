@@ -1,4 +1,5 @@
 import { CATEGORIES, CATEGORY_ORDER, type CategoryKey, type Item } from "@/data/catalog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import bannerEscrita from "@/assets/telas/montehistoria.png";
 
 export type StoryText = { inicio: string; meio: string; fim: string };
