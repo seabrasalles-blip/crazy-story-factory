@@ -36,7 +36,7 @@ import bravo from "@/assets/emocoes/bravo.png";
 import surpreso from "@/assets/emocoes/surpreso.png";
 import animado from "@/assets/emocoes/animado.png";
 
-export type Item = { id: string; label: string; image: string };
+export type Item = { id: string; label: string; image: string; description?: string };
 
 export type CategoryKey = "personagens" | "cenarios" | "amigos" | "viloes" | "emocoes";
 
