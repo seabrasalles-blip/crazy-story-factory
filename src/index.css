@@ -466,3 +466,52 @@
 }
 .story-tag-middle { background: #22B8E8; }
 .story-tag-final  { background: #FF4F93; color: #fff; }
+
+/* Indicador "i" nos ingredientes */
+.ingredient-info {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFD23F;
+  color: #1D2540;
+  border: 2px solid #1D2540;
+  border-radius: 999px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: 0 2px 0 #1D2540;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Tooltip customizado dos ingredientes */
+.ingredient-tooltip {
+  background: #FFF7D6 !important;
+  color: #1D2540 !important;
+  border: 3px solid #1D2540 !important;
+  border-radius: 18px !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 4px 0 #1D2540, 0 6px 18px rgba(29,37,64,0.25) !important;
+  max-width: 240px;
+  font-family: 'Fredoka', sans-serif;
+}
+.ingredient-tooltip-title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #7A35D8;
+  margin-bottom: 2px;
+  letter-spacing: 0.3px;
+}
+.ingredient-tooltip-desc {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1D2540;
+}
